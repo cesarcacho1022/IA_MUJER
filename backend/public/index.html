@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VigilaPerú - Centro de Monitoreo Legal Ley 30364</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #060911;
+      color: #E2E8F0;
+    }
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .alert-glow {
+      box-shadow: 0 0 25px -5px rgba(239, 68, 68, 0.4), 0 0 10px -5px rgba(220, 38, 38, 0.3);
+    }
+    @keyframes textFade {
+      0% { opacity: 0; transform: translateY(4px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .stream-fade {
+      animation: textFade 0.3s ease-out;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased selection:bg-rose-500 selection:text-white">
+
+  <!-- TOP HEADER -->
+  <header class="glass-panel sticky top-0 z-40 border-b border-slate-800/80 px-6 py-3.5">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      
+      <!-- Brand & Title -->
+      <div class="flex items-center space-x-3.5">
+        <div class="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-rose-600 to-indigo-600 text-white shadow-lg shadow-rose-900/40">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"></path></svg>
+          <span class="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+          </span>
+        </div>
+        <div>
+          <h1 class="text-lg font-black tracking-tight text-white flex items-center gap-2">
+            VigilaPerú <span class="text-[10px] px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30 font-bold uppercase tracking-wider">Ley 30364</span>
+          </h1>
+          <p class="text-xs text-slate-400">Auditoría Ética & Legal Multi-Fuente: Radio en Vivo + Prensa Digital (GPU Llama 3.2)</p>
+        </div>
+      </div>
+
+      <!-- Quick Actions & Status -->
+      <div class="flex items-center gap-3">
+        <button id="btn-inject-demo" onclick="dispararInyeccionUI()" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white text-xs font-bold shadow-lg shadow-rose-900/30 flex items-center gap-1.5 transition active:scale-95">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          <span>🚨 Inyectar Caso Liceo Naval</span>
+        </button>
+
+        <div class="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-xs text-slate-300 font-mono">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="header-time">--:--:--</span>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 md:px-6 py-6 space-y-6">
+
+    <!-- SECCIÓN CONSOLIDADORA: 3 FUENTES (RPP, EXITOSA, INFOBAE) -->
+    <section>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        
+        <!-- TARJETA 1: RADIO RPP NOTICIAS -->
+        <div class="glass-panel rounded-2xl p-5 border border-slate-800 hover:border-slate-700 transition relative overflow-hidden flex flex-col justify-between">
+          <div>
+            <div class="flex items-start justify-between">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-base">
+                  📻
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
+                    RPP Noticias
+                    <span class="inline-flex items-center px-1.5 py-0.2 rounded-full text-[9px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                      EN VIVO
+                    </span>
+                  </h3>
+                  <p class="text-[11px] text-slate-400 font-mono">89.7 FM • Cadena Nacional</p>
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="text-[9px] uppercase tracking-wider text-slate-400 font-semibold block">Vulneraciones</span>
+                <span id="count-rpp" class="text-xl font-black text-rose-500 font-mono">0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between gap-2">
+            <span class="text-[11px] text-slate-400 font-medium">Señal en directo:</span>
+            <audio controls class="h-6 w-36 opacity-85 hover:opacity-100 transition" preload="none">
+              <source src="https://mdstrm.com/audio/5fab3416b5f9ef165cfab6e9/icecast.audio" type="audio/aac">
+            </audio>
+          </div>
+        </div>
+
+        <!-- TARJETA 2: RADIO EXITOSA 95.5 FM -->
+        <div class="glass-panel rounded-2xl p-5 border border-slate-800 hover:border-slate-700 transition relative overflow-hidden flex flex-col justify-between">
+          <div>
+            <div class="flex items-start justify-between">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 font-bold text-base">
+                  📻
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
+                    Radio Exitosa
+                    <span class="inline-flex items-center px-1.5 py-0.2 rounded-full text-[9px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                      EN VIVO
+                    </span>
+                  </h3>
+                  <p class="text-[11px] text-slate-400 font-mono">95.5 FM • La voz del Perú</p>
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="text-[9px] uppercase tracking-wider text-slate-400 font-semibold block">Vulneraciones</span>
+                <span id="count-exitosa" class="text-xl font-black text-rose-500 font-mono">0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between gap-2">
+            <span class="text-[11px] text-slate-400 font-medium">Señal en directo:</span>
+            <audio controls class="h-6 w-36 opacity-85 hover:opacity-100 transition" preload="none">
+              <source src="https://neptuno-2-audio.mediaserver.digital/79525baf-b0f5-4013-a8bd-3c5c293c6561" type="audio/aac">
+            </audio>
+          </div>
+        </div>
+
+        <!-- TARJETA 3: PRENSA DIGITAL (INFOBAE) CON CLIC PARA MODAL -->
+        <div onclick="abrirModalInfobae()" class="glass-panel rounded-2xl p-5 border border-orange-500/30 hover:border-orange-500/70 bg-gradient-to-br from-orange-950/20 via-slate-900 to-slate-900 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between group shadow-lg hover:shadow-orange-950/30">
+          <div>
+            <div class="flex items-start justify-between">
+              <div class="flex items-center space-x-3">
+                <!-- Logo Infobae Estilizado -->
+                <div class="w-10 h-10 rounded-xl bg-orange-500/20 border border-orange-500/40 flex items-center justify-center font-black text-sm text-orange-400 shadow-inner group-hover:scale-105 transition">
+                  <span class="tracking-tighter">info<span class="text-white">bae</span></span>
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
+                    Infobae Perú
+                    <span class="inline-flex items-center px-1.5 py-0.2 rounded-full text-[9px] font-semibold bg-orange-500/10 text-orange-400 border border-orange-500/30">
+                      RSS FEED
+                    </span>
+                  </h3>
+                  <p id="infobae-current-date" class="text-[11px] text-orange-300/80 font-mono">-- de Octubre, 2026</p>
+                </div>
+              </div>
+
+              <!-- Indicador de Infracciones Infobae -->
+              <div class="text-right">
+                <span class="text-[9px] uppercase tracking-wider text-rose-400 font-semibold block">Infracciones</span>
+                <span id="count-infobae-vuln" class="text-xl font-black text-rose-500 font-mono">0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
+            <span class="text-xs text-slate-300 font-medium">Publicaciones totales: <strong id="count-infobae-total" class="text-white font-mono">0</strong></span>
+            <span class="text-[11px] text-orange-400 font-semibold group-hover:translate-x-1 transition flex items-center gap-1">
+              Ver Noticias ➔
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PANEL SUPERIOR: STT STREAMING EN VIVO (BLOQUES CORTOS 3-5 SEG) -->
+    <section class="glass-panel rounded-2xl p-4 border border-cyan-500/30 bg-gradient-to-r from-slate-900 via-slate-900 to-cyan-950/20 shadow-lg relative overflow-hidden">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+        <div class="flex items-center space-x-2">
+          <span class="flex h-2 w-2 relative">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
+          </span>
+          <span class="text-xs font-bold uppercase tracking-wider text-cyan-400 font-mono">STT Streaming en Vivo (Whisper CPU)</span>
+        </div>
+        <div class="text-[11px] text-slate-400 font-mono flex items-center gap-2">
+          <span>Ventana activa: <span class="text-slate-200 font-bold">3 a 5 seg</span></span>
+          <span>•</span>
+          <span id="stream-status" class="text-emerald-400 font-medium">Escuchando aire</span>
+        </div>
+      </div>
+
+      <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+        
+        <!-- Live Ticker RPP -->
+        <div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800/80">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[11px] font-bold text-amber-400 font-mono">📻 RPP Noticias</span>
+            <span id="time-rpp" class="text-[10px] text-slate-500 font-mono">hace instantes</span>
+          </div>
+          <p id="stream-rpp" class="text-slate-200 font-mono leading-relaxed h-10 overflow-hidden stream-fade">
+            Sintonizando transmisión en directo...
+          </p>
+        </div>
+
+        <!-- Live Ticker Exitosa -->
+        <div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800/80">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[11px] font-bold text-rose-400 font-mono">📻 Radio Exitosa</span>
+            <span id="time-exitosa" class="text-[10px] text-slate-500 font-mono">hace instantes</span>
+          </div>
+          <p id="stream-exitosa" class="text-slate-200 font-mono leading-relaxed h-10 overflow-hidden stream-fade">
+            Sintonizando transmisión en directo...
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MURO EXCLUSIVO DE ALERTAS ROJAS DE VULNERACIÓN -->
+    <section class="space-y-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-2.5">
+          <div class="p-1.5 rounded-lg bg-rose-500/20 text-rose-400 border border-rose-500/30">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          </div>
+          <h2 class="text-sm font-extrabold uppercase tracking-wider text-rose-400 flex items-center gap-2">
+            <span>Muro Exclusivo de Infracciones Legales (Ley 30364)</span>
+            <span id="badge-total-vuln" class="px-2 py-0.5 rounded-full bg-rose-500 text-white font-mono text-[11px] font-bold">0</span>
+          </h2>
+        </div>
+        <p class="text-xs text-slate-400 hidden sm:block">Las emisiones regulares son filtradas de este muro prioritario</p>
+      </div>
+
+      <div id="vulnerabilities-wall" class="space-y-4">
+        <div class="text-center py-12 text-slate-500 glass-panel rounded-2xl">
+          <p>Cargando historial de infracciones desde la base de datos...</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: HISTORIAL DE NOTICIAS DE INFOBAE -->
+  <div id="modal-infobae" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="glass-panel w-full max-w-4xl max-h-[85vh] rounded-2xl border border-slate-700 shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Modal Header -->
+      <div class="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-900/90">
+        <div class="flex items-center space-x-3">
+          <div class="w-9 h-9 rounded-xl bg-orange-500/20 border border-orange-500/40 flex items-center justify-center font-bold text-orange-400 text-sm">
+            info<span class="text-white">bae</span>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+              Infobae Perú - Publicaciones Extraídas del Día
+              <span id="modal-badge-count" class="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-mono">0 noticias</span>
+            </h3>
+            <p class="text-xs text-slate-400">Auditoría automática contra la Ley 30364</p>
+          </div>
+        </div>
+
+        <button onclick="cerrarModalInfobae()" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Modal Body (Lista con clases CSS condicionales) -->
+      <div id="modal-infobae-body" class="p-6 overflow-y-auto space-y-4 custom-scroll flex-1">
+        <!-- Render dinámico aquí -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 border-t border-slate-800 bg-slate-950/80 flex items-center justify-between text-xs text-slate-400">
+        <span>Monitoreo continuo de RSS feed oficial de Infobae</span>
+        <button onclick="cerrarModalInfobae()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold transition">
+          Cerrar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800/80 py-4 px-6 text-center text-xs text-slate-500 bg-slate-950/60 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p>Proyecto Hackathon - Monitoreo Ético & Legal de Medios (Radio + Prensa Digital)</p>
+      <p class="font-mono text-slate-600">PostgreSQL + Express + faster-whisper + Ollama GPU (Llama 3.2 3B)</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT DE CONTROL -->
+  <script>
+    const wallContainer = document.getElementById('vulnerabilities-wall');
+    let todasLasAlertas = [];
+
+    // Fecha actual para Infobae
+    const opcionesFecha = { day: 'numeric', month: 'long', year: 'numeric' };
+    document.getElementById('infobae-current-date').innerText = new Date().toLocaleDateString('es-PE', opcionesFecha);
+
+    // 1. Polling de Alertas (PostgreSQL)
+    async function fetchAlertas() {
+      try {
+        const response = await fetch('/api/alertas');
+        if (!response.ok) return;
+        todasLasAlertas = await response.json();
+
+        // Contadores por radio y prensa
+        const vulnTotal = todasLasAlertas.filter(item => item.vulneracion_detectada);
+        const countRPP = vulnTotal.filter(v => (v.fuente || '').toLowerCase().includes('rpp')).length;
+        const countExitosa = vulnTotal.filter(v => (v.fuente || '').toLowerCase().includes('exitosa')).length;
+
+        // Infobae
+        const infobaeItems = todasLasAlertas.filter(a => (a.fuente || '').toLowerCase().includes('infobae'));
+        const infobaeVulns = infobaeItems.filter(a => a.vulneracion_detectada).length;
+
+        document.getElementById('count-rpp').innerText = countRPP;
+        document.getElementById('count-exitosa').innerText = countExitosa;
+        document.getElementById('count-infobae-total').innerText = infobaeItems.length;
+        document.getElementById('count-infobae-vuln').innerText = infobaeVulns;
+        document.getElementById('badge-total-vuln').innerText = `${vulnTotal.length} Alertas`;
+
+        renderMuroRojo(vulnTotal);
+      } catch (err) {
+        console.error('Error cargando alertas:', err);
+      }
+    }
+
+    function renderMuroRojo(items) {
+      if (!items || items.length === 0) {
+        wallContainer.innerHTML = `
+          <div class="glass-panel rounded-2xl p-10 text-center border border-slate-800">
+            <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 mx-auto flex items-center justify-center mb-3">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h3 class="text-sm font-bold text-slate-200">Sin Infracciones Detectadas en este momento</h3>
+            <p class="text-xs text-slate-400 mt-1">El muro permanece limpio mientras las transmisiones y noticias cumplan la Ley 30364.</p>
+          </div>
+        `;
+        return;
+      }
+
+      wallContainer.innerHTML = items.map(item => {
+        const date = new Date(item.timestamp);
+        const timeStr = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        const dateStr = date.toLocaleDateString();
+
+        return `
+          <div class="glass-panel alert-glow rounded-2xl p-5 md:p-6 border-2 border-rose-500/80 bg-gradient-to-r from-rose-950/40 via-slate-900/95 to-slate-900/95 relative overflow-hidden transition-all hover:scale-[1.005]">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 via-red-500 to-amber-500"></div>
+
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 pb-3.5 border-b border-rose-500/20">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-black bg-rose-600 text-white shadow-md shadow-rose-600/40 tracking-wider uppercase animate-pulse">
+                  🚨 ALERTA ROJA LEY 30364
+                </span>
+                <span class="text-xs font-bold text-rose-300 tracking-wide uppercase px-2.5 py-0.5 rounded-lg bg-rose-950/80 border border-rose-700/60">
+                  ${escapeHtml(item.tipo_violencia || 'Violencia Mediática')}
+                </span>
+              </div>
+              <div class="text-xs text-slate-400 font-mono flex items-center space-x-2">
+                <span>📰 ${escapeHtml(item.fuente)}</span>
+                <span>•</span>
+                <span>${dateStr} ${timeStr}</span>
+                <span>•</span>
+                <span class="text-rose-400 font-bold">#ID-${item.id}</span>
+              </div>
+            </div>
+
+            <div class="mt-4 space-y-3">
+              ${item.cita_exacta ? `
+                <div class="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200">
+                  <p class="text-[11px] font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5 mb-1">
+                    <svg class="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                    Cita Textual Infractora:
+                  </p>
+                  <p class="text-sm font-semibold italic text-amber-100 pl-4">
+                    "${escapeHtml(item.cita_exacta)}"
+                  </p>
+                </div>
+              ` : ''}
+
+              ${item.justificacion_legal ? `
+                <div class="p-3.5 rounded-xl bg-rose-950/40 border border-rose-500/30 text-rose-200">
+                  <p class="text-[11px] font-bold uppercase tracking-wider text-rose-400 flex items-center gap-1.5 mb-1">
+                    ⚖️ Marco Jurídico Vulnerado:
+                  </p>
+                  <p class="text-xs leading-relaxed text-rose-100 font-medium">
+                    ${escapeHtml(item.justificacion_legal)}
+                  </p>
+                </div>
+              ` : ''}
+
+              <details class="text-xs text-slate-400 pt-1 group cursor-pointer">
+                <summary class="hover:text-slate-200 font-mono transition">Ver contenido completo analizado...</summary>
+                <p class="mt-2 text-xs text-slate-300 bg-slate-950/80 p-3 rounded-lg border border-slate-800 leading-relaxed font-mono">
+                  "${escapeHtml(item.texto_analizado)}"
+                </p>
+              </details>
+            </div>
+
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 2. MODAL DE INFOBAE CON CLASES CONDICIONALES
+    function abrirModalInfobae() {
+      const modal = document.getElementById('modal-infobae');
+      const body = document.getElementById('modal-infobae-body');
+      modal.classList.remove('hidden');
+
+      const infobaeItems = todasLasAlertas.filter(a => (a.fuente || '').toLowerCase().includes('infobae'));
+      document.getElementById('modal-badge-count').innerText = `${infobaeItems.length} noticias analizadas`;
+
+      if (infobaeItems.length === 0) {
+        body.innerHTML = `
+          <div class="text-center py-12 text-slate-400">
+            <div class="w-12 h-12 rounded-full bg-slate-800 mx-auto flex items-center justify-center text-xl mb-3">📰</div>
+            <h4 class="font-bold text-white text-sm">No hay publicaciones de Infobae registradas aún</h4>
+            <p class="text-xs text-slate-500 mt-1">Inicia el script <code class="px-1.5 py-0.5 rounded bg-slate-800 text-orange-400 font-mono">ejecutar_scraper_infobae.bat</code> para comenzar a extraer noticias.</p>
+          </div>
+        `;
+        return;
+      }
+
+      body.innerHTML = infobaeItems.map(item => {
+        const date = new Date(item.timestamp);
+        const timeStr = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        if (item.vulneracion_detectada) {
+          // CLASE CONDICIONAL: INFRACCIÓN (BORDE Y FONDO ROJO DESTACADO)
+          return `
+            <div class="p-4 rounded-xl border-2 border-rose-500 bg-rose-950/40 shadow-lg shadow-rose-950/30 transition">
+              <div class="flex items-center justify-between pb-2 border-b border-rose-500/30 mb-2.5">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-black bg-rose-600 text-white uppercase tracking-wider animate-pulse">
+                  🚨 INFRACCIÓN LEY 30364
+                </span>
+                <span class="text-xs font-mono text-slate-400">${timeStr}</span>
+              </div>
+              <p class="text-sm font-semibold text-rose-100 mb-2">
+                "${escapeHtml(item.texto_analizado)}"
+              </p>
+              ${item.cita_exacta ? `
+                <div class="p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs mb-2">
+                  <strong>Cita Infractora:</strong> "${escapeHtml(item.cita_exacta)}"
+                </div>
+              ` : ''}
+              ${item.justificacion_legal ? `
+                <div class="text-xs text-rose-300">
+                  <strong>Justificación Legal:</strong> ${escapeHtml(item.justificacion_legal)}
+                </div>
+              ` : ''}
+            </div>
+          `;
+        } else {
+          // CLASE CONDICIONAL: NOTICIA SEGURA (ESTILO SUTIL LIMPIO)
+          return `
+            <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/50 hover:border-slate-700 transition">
+              <div class="flex items-center justify-between pb-2 border-b border-slate-800 mb-2">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  ✅ Noticia Conforme
+                </span>
+                <span class="text-xs font-mono text-slate-500">${timeStr}</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed font-mono">
+                "${escapeHtml(item.texto_analizado)}"
+              </p>
+            </div>
+          `;
+        }
+      }).join('');
+    }
+
+    function cerrarModalInfobae() {
+      document.getElementById('modal-infobae').classList.add('hidden');
+    }
+
+    // Cerrar modal al hacer clic en fondo o con ESC
+    document.getElementById('modal-infobae').addEventListener('click', function(e) {
+      if (e.target === this) cerrarModalInfobae();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') cerrarModalInfobae();
+    });
+
+    // 3. Polling del Ticker en Vivo (Whisper)
+    let lastRppText = '';
+    let lastExitosaText = '';
+
+    async function fetchLiveTicker() {
+      try {
+        const res = await fetch('/api/ticker');
+        if (!res.ok) return;
+        const data = await res.json();
+
+        if (data.rpp && data.rpp.texto && data.rpp.texto !== lastRppText) {
+          lastRppText = data.rpp.texto;
+          const el = document.getElementById('stream-rpp');
+          el.innerText = `"${data.rpp.texto}"`;
+          el.classList.remove('stream-fade');
+          void el.offsetWidth;
+          el.classList.add('stream-fade');
+          document.getElementById('time-rpp').innerText = new Date(data.rpp.timestamp).toLocaleTimeString();
+        }
+
+        if (data.exitosa && data.exitosa.texto && data.exitosa.texto !== lastExitosaText) {
+          lastExitosaText = data.exitosa.texto;
+          const el = document.getElementById('stream-exitosa');
+          el.innerText = `"${data.exitosa.texto}"`;
+          el.classList.remove('stream-fade');
+          void el.offsetWidth;
+          el.classList.add('stream-exitosa');
+          document.getElementById('time-exitosa').innerText = new Date(data.exitosa.timestamp).toLocaleTimeString();
+        }
+      } catch (e) {}
+    }
+
+    // Inyección de Prueba desde la UI
+    async function dispararInyeccionUI() {
+      const btn = document.getElementById('btn-inject-demo');
+      const original = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `<span class="animate-spin mr-1">⌛</span> Analizando en GPU...`;
+
+      try {
+        const payload = {
+          fuente: "Inyección Demo - Caso Liceo Naval",
+          texto: "En vivo desde los exteriores del Liceo Naval. Se ha filtrado la identidad de la escolar de 14 años de iniciales V.S. o Valeria Sánchez, quien acusa al instructor militar de agresión y tocamientos."
+        };
+
+        const res = await fetch('/api/analizar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) throw new Error('Error al inyectar');
+        await fetchAlertas();
+      } catch (err) {
+        alert('Error: ' + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = original;
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Reloj header
+    setInterval(() => {
+      document.getElementById('header-time').innerText = new Date().toLocaleTimeString();
+    }, 1000);
+
+    // Inicializar polling
+    fetchAlertas();
+    fetchLiveTicker();
+
+    setInterval(fetchAlertas, 3000);
+    setInterval(fetchLiveTicker, 1500);
+  </script>
+</body>
+</html>
