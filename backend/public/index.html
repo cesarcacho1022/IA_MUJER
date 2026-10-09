@@ -1,609 +1,2050 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VigilaPerú - Centro de Monitoreo Legal Ley 30364</title>
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Google Fonts: Inter & JetBrains Mono -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          }
-        }
-      }
-    }
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qhaway Medios · Monitoreo y contraste normativo (Ley N.° 30364)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=Public+Sans:wght@400..700&display=swap">
+<style>
+:root{--ground:#F3F4F6;--surface:#FFFFFF;--ink:#14161B;--ink2:#464C58;--ink3:#5F6572;--line:#DCDFE5;--line2:#ECEEF2;--brand:#7A1F3D;--brand-soft:#F7EAEE;--hl:#FFE48F;--serif:'Newsreader',Georgia,serif;--sans:'Public Sans','Helvetica Neue',Arial,sans-serif;--mono:var(--sans)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5}
+a{color:inherit}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+button{cursor:pointer}
+button:disabled{cursor:default;opacity:.55}
+a:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+h1,h2,h3,p,ul,ol,dl,dd{margin:0}
+ul,ol{padding:0;list-style:none}
+.hidden{display:none!important}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:8px 14px;border-radius:8px;z-index:100}
+.skip:focus{left:8px}
+.mono{font-family:var(--mono)}
+.mono,.conn,.r-id,.ri-top .id,.ch-top .id,.traza .when,.seg,.bar-total,table.tb td{font-variant-numeric:tabular-nums}
+.wrap{max-width:1280px;margin:0 auto;padding:0 24px}
+.page{padding-top:32px;padding-bottom:56px}
 
-  <style>
-    body {
-      background-color: #060911;
-      color: #E2E8F0;
-    }
-    .glass-panel {
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .alert-glow {
-      box-shadow: 0 0 25px -5px rgba(239, 68, 68, 0.4), 0 0 10px -5px rgba(220, 38, 38, 0.3);
-    }
-    @keyframes textFade {
-      0% { opacity: 0; transform: translateY(4px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    .stream-fade {
-      animation: textFade 0.3s ease-out;
-    }
-    .custom-scroll::-webkit-scrollbar {
-      width: 6px;
-    }
-    .custom-scroll::-webkit-scrollbar-track {
-      background: #0f172a;
-    }
-    .custom-scroll::-webkit-scrollbar-thumb {
-      background: #334155;
-      border-radius: 4px;
-    }
-  </style>
+/* Cabecera */
+.app-header{background:var(--surface);border-bottom:1px solid var(--line)}
+.hdr{display:flex;flex-wrap:wrap;align-items:center;gap:8px 32px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;padding:12px 0}
+.brand-mark{width:38px;height:38px;border-radius:8px;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;flex:none}
+.brand-txt{display:flex;flex-direction:column;line-height:1.2}
+.brand-name{font-family:var(--serif);font-size:21px;font-weight:600;letter-spacing:-.01em}
+.brand-sub{font-size:12px;color:var(--ink3)}
+.main-nav{display:flex;flex-wrap:wrap;gap:4px;flex:1 1 auto}
+.navlink{display:flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:8px;text-decoration:none;font-weight:500;font-size:14px;color:var(--ink2)}
+.navlink:hover{background:var(--line2)}
+.navlink[aria-current=page]{font-weight:600;color:var(--ink);box-shadow:inset 0 -3px 0 var(--brand)}
+.badge{min-width:22px;padding:1px 7px;border-radius:99px;background:var(--ink);color:#fff;font-size:12px;font-weight:600;text-align:center}
+.hdr-right{display:flex;align-items:center;gap:14px;padding:8px 0;flex-wrap:wrap}
+.revisor{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink2)}
+.revisor input{width:180px;min-height:40px}
+.conn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--ink2)}
+.dot{width:8px;height:8px;border-radius:99px;background:var(--brand);flex:none}
+.dot.off{background:#fff;border:2px solid var(--ink3)}
+
+/* Principio de diseño */
+.principle{background:var(--brand-soft);border:1px solid #EBD3DA;border-radius:10px;padding:10px 16px;margin-bottom:24px;display:flex;align-items:center;gap:12px;color:var(--brand)}
+.principle p{font-size:14px;color:var(--ink)}
+
+/* Controles */
+.in{min-height:44px;padding:0 12px;border-radius:8px;border:1px solid #8A91A0;background:#fff;font-size:14px;color:var(--ink)}
+textarea.in{padding:10px 12px;line-height:1.45;font-size:15px;resize:vertical;width:100%}
+select.in,input.in[type=text]{width:100%}
+.lbl{font-size:12px;color:var(--ink3)}
+.fgroup{display:flex;flex-direction:column;gap:2px}
+.btn{min-height:44px;padding:0 16px;border-radius:8px;border:1px solid var(--ink);background:#fff;color:var(--ink);font-size:14px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;white-space:nowrap}
+.btn:hover:not(:disabled){background:var(--line2)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover:not(:disabled){background:#2A2E38}
+.btn-lg{min-height:48px;border-radius:10px;font-size:15px}
+.btn-quiet{min-height:44px;padding:0 6px;border:0;background:transparent;font-size:13px;color:var(--ink2);text-decoration:underline;font-weight:400;display:inline-flex;align-items:center;cursor:pointer}
+
+/* Títulos y estructura */
+.title-row{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 16px;margin-bottom:24px}
+h1.h1{font-family:var(--serif);font-size:36px;font-weight:500;letter-spacing:-.015em;line-height:1.15}
+.sub{margin-top:6px;color:var(--ink2)}
+.title-ctrl{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.ctrl-row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px}
+.status{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:13px;color:var(--ink2)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.pad{padding:20px 22px}
+h2.h2{font-family:var(--serif);font-size:22px;font-weight:500}
+.h2-sub{margin-top:2px;font-size:13px;color:var(--ink3)}
+.stack{display:flex;flex-direction:column}
+.g8{gap:8px}.g12{gap:12px}.g14{gap:14px}.g16{gap:16px}.g24{gap:24px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:12px;margin-bottom:24px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 20px;display:flex;flex-direction:column;gap:4px;text-decoration:none;color:var(--ink)}
+.tile .t-lbl{font-size:13px;font-weight:600;color:var(--ink2)}
+.tile .t-num{font-family:var(--serif);font-size:36px;line-height:1.1;font-weight:500}
+.tile.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tile.dark .t-lbl,.tile.dark .t-det{color:#E3E5EA}
+.tile .t-det{font-size:13px;color:var(--ink2);display:flex;align-items:center;gap:6px}
+.cols{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start}
+
+/* Etiquetas */
+.tipo{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500}
+.shape{width:10px;height:10px;flex:none;display:inline-block}
+.pill{display:inline-flex;align-items:center;justify-content:center;min-height:28px;padding:0 10px;border-radius:99px;font-size:12px;font-weight:600;border:1px solid;white-space:nowrap}
+.chip{display:inline-flex;align-items:center;gap:7px;min-height:30px;padding:0 12px;border-radius:99px;background:var(--line2);font-size:13px;font-weight:600}
+
+/* Monitoreo: lista */
+.list{flex:999 1 640px;min-width:0;overflow:hidden}
+.card-head{padding:18px 20px 0}
+.card-head h2{font-family:var(--serif);font-size:24px;font-weight:500;letter-spacing:-.01em}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;padding:14px 20px 0;border-bottom:1px solid var(--line)}
+.tab{min-height:44px;padding:0 14px;background:transparent;border:0;border-bottom:3px solid transparent;font-size:14px;font-weight:500;color:var(--ink2);display:flex;align-items:center;gap:8px}
+.tab[aria-pressed=true]{border-bottom-color:var(--brand);font-weight:600;color:var(--ink)}
+.count{min-width:24px;height:22px;padding:0 7px;border-radius:99px;background:var(--line2);color:var(--ink);font-size:12px;font-weight:600;display:inline-flex;align-items:center;justify-content:center}
+.tab[aria-pressed=true] .count{background:var(--ink);color:#fff}
+.list{container:lista/inline-size}
+.row,.row-head{display:grid;grid-template-columns:72px minmax(0,1.1fr) minmax(0,1fr) minmax(0,1.2fr) 172px;column-gap:16px;align-items:center;padding:16px 20px}
+.row{border-bottom:1px solid var(--line2)}
+.row:hover{background:#FAFAFB}
+.row-head{padding-top:10px;padding-bottom:10px;background:#FAFAFB;border-bottom:1px solid var(--line2);font-size:12px;font-weight:600;color:var(--ink2)}
+.c{min-width:0;display:flex;flex-direction:column;gap:2px}
+.c-act{justify-self:end}
+.r-id{font-family:var(--mono);font-size:13px;font-weight:500}
+.r-med{font-size:14px;font-weight:600;overflow-wrap:anywhere}
+.r-prog{font-size:12px;color:var(--ink3)}
+.r-esp{font-size:12px;font-weight:600;color:var(--ink2);overflow-wrap:anywhere}
+.r-tipo{gap:6px;align-items:flex-start}
+.r-conf{font-size:12px;color:var(--ink2)}
+.r-conf strong{font-weight:700;color:var(--ink)}
+.r-pill{align-self:flex-start;width:104px;margin-bottom:4px}
+@container lista (max-width:700px){
+  .row-head{display:none}
+  .row{grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;grid-template-areas:"id med act" "est tipo act";gap:12px 16px;align-items:start}
+  .c-id{grid-area:id}.c-med{grid-area:med}.c-est{grid-area:est}.c-tipo{grid-area:tipo}.c-act{grid-area:act;align-self:center}
+}
+@container lista (max-width:520px){
+  .row{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"id med" "est tipo" "act act"}
+  .c-act{justify-self:start;margin-top:4px}
+}
+.empty{padding:32px 20px;color:var(--ink3);text-align:center}
+.side{flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:24px}
+.emi{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-top:1px solid var(--line2)}
+.emi .e-dot{width:10px;height:10px;flex:none;border-radius:99px;margin-top:6px;box-sizing:border-box}
+.emi .e-body{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.3}
+.emi .e-n{font-size:14px;font-weight:600}
+.emi .e-s{font-size:12px;color:var(--ink3)}
+.emi .e-live{font-size:12px;color:var(--ink2);margin-top:2px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.emi .e-st{font-size:12px;font-weight:600;color:var(--ink2);white-space:nowrap}
+
+/* Detalle de casos */
+.det{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start}
+.rail{flex:1 1 280px;max-width:100%;min-width:0;overflow:hidden}
+.rail-head{padding:16px 18px 12px;border-bottom:1px solid var(--line)}
+.rail-head h2{font-family:var(--serif);font-size:20px;font-weight:500}
+.rail-head p{margin-top:2px;font-size:13px;color:var(--ink3)}
+.railtabs{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line)}
+.rtab{min-height:60px;padding:8px 4px;background:transparent;border:0;border-bottom:3px solid transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink2)}
+.rtab[aria-pressed=true]{border-bottom-color:var(--brand);color:var(--ink)}
+.rtab .n{font-family:var(--serif);font-size:22px;line-height:1.1;font-weight:500}
+.rtab .l{font-size:12px;font-weight:500}
+.rtab[aria-pressed=true] .l{font-weight:700}
+.ritems{max-height:calc(100vh - 280px);min-height:120px;overflow-y:auto}
+.ritem{display:flex;flex-direction:column;gap:6px;padding:14px 18px;border-bottom:1px solid var(--line2);text-decoration:none;width:100%;text-align:left;background:transparent;border-left:0;border-right:0;border-top:0}
+.ritem:hover{background:#FAFAFB}
+.ritem[aria-current=true]{background:#F6F7F9;box-shadow:inset 0 0 0 2px var(--ink)}
+.ri-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ri-top .id{font-family:var(--mono);font-size:12px;font-weight:500}
+.ri-top .st{font-size:12px;font-weight:600;color:var(--ink2)}
+.ri-ago{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px;font-size:13px}
+.ri-ago b{font-weight:600}
+.ri-med{font-size:13px;color:var(--ink2)}
+.det-main{flex:999 1 760px;min-width:0;display:flex;flex-direction:column;gap:24px}
+.casehead{padding:22px 24px;display:flex;flex-direction:column;gap:14px}
+.ch-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.ch-top .id{font-family:var(--mono);font-size:13px;color:var(--ink3)}
+.casehead h1{font-family:var(--serif);font-size:34px;font-weight:500;letter-spacing:-.015em;line-height:1.15}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.dl{margin-top:4px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(170px,100%),1fr));gap:14px 24px}
+.dl dt{font-size:12px;color:var(--ink3)}
+.dl dd{font-weight:600}
+.two{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start}
+.colL{flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:24px}
+.colR{flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:24px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.legend-hl{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--ink2)}
+.legend-hl i{width:14px;height:10px;border-radius:2px;background:var(--hl);box-shadow:inset 0 -2px 0 #D9A400}
+.transcript{font-family:var(--serif);font-size:19px;line-height:1.6;padding:12px;border-radius:8px;background:#FAFAFB;border:1px solid var(--line2);overflow-wrap:anywhere}
+mark.frag{background:var(--hl);color:var(--ink);border-radius:3px;padding:1px 3px;box-shadow:inset 0 -2px 0 #D9A400}
+.note{font-size:12px;color:var(--ink3)}
+.noclip{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink2);padding:10px 12px;border:1px dashed #8A91A0;border-radius:8px}
+.traza{display:flex;flex-direction:column}
+.traza li{display:flex;gap:14px;padding-bottom:16px}
+.traza .tdot{flex:none;margin-top:6px;width:10px;height:10px;border-radius:99px;border:2px solid var(--ink);box-sizing:border-box}
+.traza .tt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.traza .when{font-family:var(--mono);font-size:12px;color:var(--ink3)}
+.traza .ttl{font-weight:600;font-size:14px}
+.traza .det-t{font-size:13px;color:var(--ink2);overflow-wrap:anywhere}
+.eyebrow{font-size:12px;font-weight:600;color:var(--ink3);letter-spacing:.04em;text-transform:uppercase}
+.crit-name{font-weight:600;font-size:16px}
+.tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:99px;font-size:12px;font-weight:600}
+.tag-brand{background:var(--brand-soft);color:var(--brand)}
+.tag-line{border:1px solid var(--ink3);color:var(--ink2)}
+.why{display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-radius:8px;background:#F6F7F9}
+.otras{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--ink2)}
+.dec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:10px}
+.dec{min-height:76px;padding:12px 14px;border-radius:10px;border:2px solid #8A91A0;background:#fff;color:var(--ink);text-align:left;display:flex;flex-direction:column;gap:4px;font-weight:600;font-size:14px}
+.dec[aria-pressed=true][data-v=confirmar]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.dec[aria-pressed=true][data-v=descartar]{background:#ECEEF2;border-color:var(--ink)}
+.dec[aria-pressed=true][data-v=corregir]{background:var(--brand-soft);border-color:var(--brand)}
+.err{padding:10px 12px;border-radius:8px;background:#FDECEC;color:#8A1C1C;font-size:14px;font-weight:500}
+.panel{margin:0;padding:14px 16px 16px;border:1px solid var(--line);border-radius:10px;background:#FAFAFB;display:flex;flex-direction:column;gap:12px;min-width:0}
+.panel legend{padding:0 6px;font-size:13px;font-weight:600}
+.opt{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
+.opt.on{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand)}
+.opt input{margin-top:3px;flex:none}
+.opt .o-t{font-weight:600;font-size:14px}
+.opt .o-s{font-size:13px;color:var(--ink2)}
+.ctx{display:flex;flex-direction:column;gap:4px;padding:10px 12px;border-radius:8px;background:#fff;border:1px solid var(--line2);font-size:13px;color:var(--ink2)}
+.saved{display:flex;flex-direction:column;gap:12px;padding:16px;border-radius:10px;background:#F6F7F9;border:1px solid var(--line)}
+.saved .s-t{display:flex;align-items:center;gap:10px;font-weight:600}
+.status-box{display:flex;flex-direction:column;gap:4px;padding:12px 14px;border-radius:10px;background:#F6F7F9;border:1px solid var(--line)}
+.status-box b{display:flex;align-items:center;gap:8px;font-size:14px}
+.row-btns{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+/* Sesión */
+.usr{display:flex;align-items:center;gap:10px}
+.usr-av{width:34px;height:34px;border-radius:99px;background:var(--brand-soft);color:var(--brand);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex:none}
+.usr-txt{display:flex;flex-direction:column;line-height:1.2}
+.usr-n{font-size:13px;font-weight:600}
+.usr .btn-quiet{min-height:24px;padding:0;font-size:12px;align-self:flex-start}
+.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.login-card{width:min(420px,100%);padding:28px 28px 24px;display:flex;flex-direction:column;gap:16px}
+.login-card h1{font-family:var(--serif);font-size:30px;font-weight:500;letter-spacing:-.015em;line-height:1.15}
+.login-brand{display:flex;align-items:center;gap:12px}
+.login-form{display:flex;flex-direction:column;gap:14px}
+.aviso{padding:10px 12px;border-radius:8px;background:var(--brand-soft);color:var(--ink);font-size:14px}
+
+/* Páginas */
+.pager{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 16px;padding:6px 12px 6px 20px;border-top:1px solid var(--line2)}
+.pg-btns{display:flex;align-items:center;gap:2px}
+.pg-num{font-size:13px;color:var(--ink2);padding:0 6px;white-space:nowrap}
+.pg-arrow{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:8px;background:transparent;color:var(--ink)}
+.pg-arrow:hover:not(:disabled){background:var(--line2)}
+.pg-arrow:disabled{opacity:.35}
+.btn-link{min-height:44px;padding:0 6px;border:0;border-radius:6px;background:transparent;color:var(--ink2);font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.btn-link:hover:not(:disabled){color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.more{display:flex;align-items:center;justify-content:flex-start;padding:0 14px;border-top:1px solid var(--line2)}
+.ritems .more{padding:0 12px;justify-content:flex-start}
+
+/* Observatorio */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:16px;margin-bottom:24px}
+.kpi{padding:18px 22px;display:flex;flex-direction:column;gap:6px}
+.kpi .k-lbl{font-size:13px;font-weight:600;color:var(--ink2)}
+.kpi .k-num{font-family:var(--serif);font-size:44px;line-height:1;font-weight:500}
+.kpi .k-det{font-size:13px;color:var(--ink2)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13px}
+.legend li{display:flex;align-items:center;gap:7px}
+.bar-head,.bar-row{display:grid;grid-template-columns:minmax(130px,230px) minmax(0,1fr) 96px;gap:16px;align-items:center}
+.bar-head{font-size:12px;font-weight:600;color:var(--ink3)}
+.bar-name{display:flex;flex-direction:column;line-height:1.3}
+.bar-name b{font-size:14px;font-weight:600}
+.bar-name span{font-size:12px;color:var(--ink3)}
+.bar-track{display:flex;height:32px;border-radius:4px;overflow:hidden;background:var(--line2)}
+.seg{flex:none;border-left:2px solid #fff;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;font-weight:500;overflow:hidden}
+.bar-total{text-align:right;font-family:var(--mono);font-size:15px;font-weight:600}
+table.tb{width:100%;border-collapse:collapse;font-size:14px}
+table.tb th,table.tb td{padding:8px 10px;border-bottom:1px solid var(--line2);text-align:right;font-family:var(--mono)}
+table.tb th{font-size:12px;color:var(--ink3);font-weight:600;font-family:var(--sans);border-bottom-color:var(--line)}
+table.tb th:first-child,table.tb td:first-child,table.tb th:nth-child(2),table.tb td:nth-child(2){text-align:left;font-family:var(--sans)}
+table.tb td:first-child{font-weight:600}
+
+.dec:disabled{opacity:1;cursor:default}
+.dec:disabled[aria-pressed=false]{opacity:.5}
+.flabel{font-size:13px;font-weight:600}
+.opt-tags{display:flex;flex-wrap:wrap;gap:6px}
+.back{font-weight:600;font-size:14px;color:var(--ink2);text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+.back:hover{text-decoration:underline}
+.saved:focus{outline:2px solid var(--brand);outline-offset:2px}
+.ritem:focus-visible{outline-offset:-2px}
+
+.toast{position:fixed;right:16px;bottom:16px;z-index:60;max-width:380px;padding:12px 16px;border-radius:10px;background:var(--ink);color:#fff;font-size:14px;font-weight:500;box-shadow:0 8px 24px rgba(20,22,27,.25)}
+.toast.err-t{background:#8A1C1C}
+
+@media (min-width:1100px){.rail{position:sticky;top:16px}}
+@media (max-width:720px){
+  .wrap{padding:0 16px}
+  h1.h1{font-size:30px}
+  .casehead h1{font-size:28px}
+  .title-ctrl{align-items:flex-start}
+  .bar-head,.bar-row{grid-template-columns:minmax(100px,140px) minmax(0,1fr) 56px;gap:10px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head>
-<body class="min-h-screen flex flex-col font-sans antialiased selection:bg-rose-500 selection:text-white">
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
 
-  <!-- TOP HEADER -->
-  <header class="glass-panel sticky top-0 z-40 border-b border-slate-800/80 px-6 py-3.5">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-      
-      <!-- Brand & Title -->
-      <div class="flex items-center space-x-3.5">
-        <div class="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-rose-600 to-indigo-600 text-white shadow-lg shadow-rose-900/40">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"></path></svg>
-          <span class="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-          </span>
-        </div>
-        <div>
-          <h1 class="text-lg font-black tracking-tight text-white flex items-center gap-2">
-            VigilaPerú <span class="text-[10px] px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30 font-bold uppercase tracking-wider">Ley 30364</span>
-          </h1>
-          <p class="text-xs text-slate-400">Auditoría Ética & Legal Multi-Fuente: Radio en Vivo + Prensa Digital (GPU Llama 3.2)</p>
-        </div>
-      </div>
-
-      <!-- Quick Actions & Status -->
-      <div class="flex items-center gap-3">
-        <button id="btn-inject-demo" onclick="dispararInyeccionUI()" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white text-xs font-bold shadow-lg shadow-rose-900/30 flex items-center gap-1.5 transition active:scale-95">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-          <span>🚨 Inyectar Caso Liceo Naval</span>
-        </button>
-
-        <div class="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-xs text-slate-300 font-mono">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span id="header-time">--:--:--</span>
-        </div>
-      </div>
-
+<section id="login" class="login hidden" aria-labelledby="h-login">
+  <div class="card login-card">
+    <div class="login-brand">
+      <span class="brand-mark"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+      <span class="brand-txt"><span class="brand-name">Qhaway Medios</span><span class="brand-sub">Monitoreo y contraste normativo · Ley N.° 30364</span></span>
     </div>
-  </header>
+    <div>
+      <h1 id="h-login">Iniciar sesión</h1>
+      <p class="sub">Solo personas revisoras autorizadas. Tus decisiones quedan firmadas con tu nombre.</p>
+    </div>
+    <p class="aviso hidden" id="login-aviso">Todavía no hay usuarios. Ejecuta <strong>crear_usuario.bat</strong>, en la carpeta del proyecto, para crear el primero.</p>
+    <form class="login-form" id="login-form" novalidate>
+      <div class="fgroup"><label class="flabel" for="login-usuario">Usuario</label><input id="login-usuario" class="in" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="60"></div>
+      <div class="fgroup"><label class="flabel" for="login-clave">Contraseña</label><input id="login-clave" class="in" type="password" autocomplete="current-password" maxlength="200"></div>
+      <p class="err hidden" id="login-error" role="alert"></p>
+      <button type="submit" class="btn btn-dark btn-lg" id="login-enviar">Entrar</button>
+    </form>
+  </div>
+</section>
 
-  <!-- MAIN CONTAINER -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 md:px-6 py-6 space-y-6">
-
-    <!-- SECCIÓN CONSOLIDADORA: 3 FUENTES (RPP, EXITOSA, INFOBAE) -->
-    <section>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        
-        <!-- TARJETA 1: RADIO RPP NOTICIAS -->
-        <div class="glass-panel rounded-2xl p-5 border border-slate-800 hover:border-slate-700 transition relative overflow-hidden flex flex-col justify-between">
-          <div>
-            <div class="flex items-start justify-between">
-              <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-base">
-                  📻
-                </div>
-                <div>
-                  <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
-                    RPP Noticias
-                    <span class="inline-flex items-center px-1.5 py-0.2 rounded-full text-[9px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-                      EN VIVO
-                    </span>
-                  </h3>
-                  <p class="text-[11px] text-slate-400 font-mono">89.7 FM • Cadena Nacional</p>
-                </div>
-              </div>
-              <div class="text-right">
-                <span class="text-[9px] uppercase tracking-wider text-slate-400 font-semibold block">Vulneraciones</span>
-                <span id="count-rpp" class="text-xl font-black text-rose-500 font-mono">0</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between gap-2">
-            <span class="text-[11px] text-slate-400 font-medium">Señal en directo:</span>
-            <audio controls class="h-6 w-36 opacity-85 hover:opacity-100 transition" preload="none">
-              <source src="https://mdstrm.com/audio/5fab3416b5f9ef165cfab6e9/icecast.audio" type="audio/aac">
-            </audio>
-          </div>
-        </div>
-
-        <!-- TARJETA 2: RADIO EXITOSA 95.5 FM -->
-        <div class="glass-panel rounded-2xl p-5 border border-slate-800 hover:border-slate-700 transition relative overflow-hidden flex flex-col justify-between">
-          <div>
-            <div class="flex items-start justify-between">
-              <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 font-bold text-base">
-                  📻
-                </div>
-                <div>
-                  <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
-                    Radio Exitosa
-                    <span class="inline-flex items-center px-1.5 py-0.2 rounded-full text-[9px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-                      EN VIVO
-                    </span>
-                  </h3>
-                  <p class="text-[11px] text-slate-400 font-mono">95.5 FM • La voz del Perú</p>
-                </div>
-              </div>
-              <div class="text-right">
-                <span class="text-[9px] uppercase tracking-wider text-slate-400 font-semibold block">Vulneraciones</span>
-                <span id="count-exitosa" class="text-xl font-black text-rose-500 font-mono">0</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between gap-2">
-            <span class="text-[11px] text-slate-400 font-medium">Señal en directo:</span>
-            <audio controls class="h-6 w-36 opacity-85 hover:opacity-100 transition" preload="none">
-              <source src="https://neptuno-2-audio.mediaserver.digital/79525baf-b0f5-4013-a8bd-3c5c293c6561" type="audio/aac">
-            </audio>
-          </div>
-        </div>
-
-        <!-- TARJETA 3: PRENSA DIGITAL (INFOBAE) CON CLIC PARA MODAL -->
-        <div onclick="abrirModalInfobae()" class="glass-panel rounded-2xl p-5 border border-orange-500/30 hover:border-orange-500/70 bg-gradient-to-br from-orange-950/20 via-slate-900 to-slate-900 transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between group shadow-lg hover:shadow-orange-950/30">
-          <div>
-            <div class="flex items-start justify-between">
-              <div class="flex items-center space-x-3">
-                <!-- Logo Infobae Estilizado -->
-                <div class="w-10 h-10 rounded-xl bg-orange-500/20 border border-orange-500/40 flex items-center justify-center font-black text-sm text-orange-400 shadow-inner group-hover:scale-105 transition">
-                  <span class="tracking-tighter">info<span class="text-white">bae</span></span>
-                </div>
-                <div>
-                  <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
-                    Infobae Perú
-                    <span class="inline-flex items-center px-1.5 py-0.2 rounded-full text-[9px] font-semibold bg-orange-500/10 text-orange-400 border border-orange-500/30">
-                      RSS FEED
-                    </span>
-                  </h3>
-                  <p id="infobae-current-date" class="text-[11px] text-orange-300/80 font-mono">-- de Octubre, 2026</p>
-                </div>
-              </div>
-
-              <!-- Indicador de Infracciones Infobae -->
-              <div class="text-right">
-                <span class="text-[9px] uppercase tracking-wider text-rose-400 font-semibold block">Infracciones</span>
-                <span id="count-infobae-vuln" class="text-xl font-black text-rose-500 font-mono">0</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
-            <span class="text-xs text-slate-300 font-medium">Publicaciones totales: <strong id="count-infobae-total" class="text-white font-mono">0</strong></span>
-            <span class="text-[11px] text-orange-400 font-semibold group-hover:translate-x-1 transition flex items-center gap-1">
-              Ver Noticias ➔
-            </span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- PANEL SUPERIOR: STT STREAMING EN VIVO (BLOQUES CORTOS 3-5 SEG) -->
-    <section class="glass-panel rounded-2xl p-4 border border-cyan-500/30 bg-gradient-to-r from-slate-900 via-slate-900 to-cyan-950/20 shadow-lg relative overflow-hidden">
-      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
-        <div class="flex items-center space-x-2">
-          <span class="flex h-2 w-2 relative">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
-          </span>
-          <span class="text-xs font-bold uppercase tracking-wider text-cyan-400 font-mono">STT Streaming en Vivo (Whisper CPU)</span>
-        </div>
-        <div class="text-[11px] text-slate-400 font-mono flex items-center gap-2">
-          <span>Ventana activa: <span class="text-slate-200 font-bold">3 a 5 seg</span></span>
-          <span>•</span>
-          <span id="stream-status" class="text-emerald-400 font-medium">Escuchando aire</span>
-        </div>
-      </div>
-
-      <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-        
-        <!-- Live Ticker RPP -->
-        <div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800/80">
-          <div class="flex items-center justify-between mb-1">
-            <span class="text-[11px] font-bold text-amber-400 font-mono">📻 RPP Noticias</span>
-            <span id="time-rpp" class="text-[10px] text-slate-500 font-mono">hace instantes</span>
-          </div>
-          <p id="stream-rpp" class="text-slate-200 font-mono leading-relaxed h-10 overflow-hidden stream-fade">
-            Sintonizando transmisión en directo...
-          </p>
-        </div>
-
-        <!-- Live Ticker Exitosa -->
-        <div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800/80">
-          <div class="flex items-center justify-between mb-1">
-            <span class="text-[11px] font-bold text-rose-400 font-mono">📻 Radio Exitosa</span>
-            <span id="time-exitosa" class="text-[10px] text-slate-500 font-mono">hace instantes</span>
-          </div>
-          <p id="stream-exitosa" class="text-slate-200 font-mono leading-relaxed h-10 overflow-hidden stream-fade">
-            Sintonizando transmisión en directo...
-          </p>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- MURO EXCLUSIVO DE ALERTAS ROJAS DE VULNERACIÓN -->
-    <section class="space-y-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-2.5">
-          <div class="p-1.5 rounded-lg bg-rose-500/20 text-rose-400 border border-rose-500/30">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-          </div>
-          <h2 class="text-sm font-extrabold uppercase tracking-wider text-rose-400 flex items-center gap-2">
-            <span>Muro Exclusivo de Infracciones Legales (Ley 30364)</span>
-            <span id="badge-total-vuln" class="px-2 py-0.5 rounded-full bg-rose-500 text-white font-mono text-[11px] font-bold">0</span>
-          </h2>
-        </div>
-        <p class="text-xs text-slate-400 hidden sm:block">Las emisiones regulares son filtradas de este muro prioritario</p>
-      </div>
-
-      <div id="vulnerabilities-wall" class="space-y-4">
-        <div class="text-center py-12 text-slate-500 glass-panel rounded-2xl">
-          <p>Cargando historial de infracciones desde la base de datos...</p>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- MODAL: HISTORIAL DE NOTICIAS DE INFOBAE -->
-  <div id="modal-infobae" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="glass-panel w-full max-w-4xl max-h-[85vh] rounded-2xl border border-slate-700 shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-      
-      <!-- Modal Header -->
-      <div class="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-900/90">
-        <div class="flex items-center space-x-3">
-          <div class="w-9 h-9 rounded-xl bg-orange-500/20 border border-orange-500/40 flex items-center justify-center font-bold text-orange-400 text-sm">
-            info<span class="text-white">bae</span>
-          </div>
-          <div>
-            <h3 class="text-base font-bold text-white flex items-center gap-2">
-              Infobae Perú - Publicaciones Extraídas del Día
-              <span id="modal-badge-count" class="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-mono">0 noticias</span>
-            </h3>
-            <p class="text-xs text-slate-400">Auditoría automática contra la Ley 30364</p>
-          </div>
-        </div>
-
-        <button onclick="cerrarModalInfobae()" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
-      </div>
-
-      <!-- Modal Body (Lista con clases CSS condicionales) -->
-      <div id="modal-infobae-body" class="p-6 overflow-y-auto space-y-4 custom-scroll flex-1">
-        <!-- Render dinámico aquí -->
-      </div>
-
-      <!-- Modal Footer -->
-      <div class="p-4 border-t border-slate-800 bg-slate-950/80 flex items-center justify-between text-xs text-slate-400">
-        <span>Monitoreo continuo de RSS feed oficial de Infobae</span>
-        <button onclick="cerrarModalInfobae()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold transition">
-          Cerrar
-        </button>
-      </div>
-
+<div id="app" class="hidden">
+<header class="app-header">
+  <div class="wrap hdr">
+    <a class="brand" href="#monitoreo">
+      <span class="brand-mark"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+      <span class="brand-txt"><span class="brand-name">Qhaway Medios</span><span class="brand-sub">Monitoreo y contraste normativo · Ley N.° 30364</span></span>
+    </a>
+    <nav class="main-nav" aria-label="Secciones">
+      <a class="navlink" href="#monitoreo" data-nav="monitoreo">Monitoreo</a>
+      <a class="navlink" href="#detalle" data-nav="detalle">Detalle de casos<span class="badge hidden" id="nav-badge">0</span></a>
+      <a class="navlink" href="#observatorio" data-nav="observatorio">Observatorio</a>
+    </nav>
+    <div class="hdr-right">
+      <div class="usr"><span class="usr-av" id="usr-ini" aria-hidden="true"></span><span class="usr-txt"><span class="usr-n" id="usr-nombre"></span><button type="button" class="btn-quiet" data-act="logout">Cerrar sesión</button></span></div>
+      <span class="conn" id="conn" title="Conexión con el servidor"><span class="dot" id="dot"></span><span id="clock">--:--:--</span></span>
     </div>
   </div>
+</header>
 
-  <!-- FOOTER -->
-  <footer class="border-t border-slate-800/80 py-4 px-6 text-center text-xs text-slate-500 bg-slate-950/60 mt-auto">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-      <p>Proyecto Hackathon - Monitoreo Ético & Legal de Medios (Radio + Prensa Digital)</p>
-      <p class="font-mono text-slate-600">PostgreSQL + Express + faster-whisper + Ollama GPU (Llama 3.2 3B)</p>
-    </div>
-  </footer>
+<main id="main" class="wrap page" tabindex="-1">
+  <section id="view-monitoreo" data-view="monitoreo" aria-label="Monitoreo de casos"></section>
+  <section id="view-detalle" data-view="detalle" class="hidden" aria-label="Detalle de casos"></section>
+  <section id="view-observatorio" data-view="observatorio" class="hidden" aria-label="Observatorio de casos validados"></section>
+</main>
 
-  <!-- SCRIPT DE CONTROL -->
-  <script>
-    const wallContainer = document.getElementById('vulnerabilities-wall');
-    let todasLasAlertas = [];
+</div>
 
-    // Fecha actual para Infobae
-    const opcionesFecha = { day: 'numeric', month: 'long', year: 'numeric' };
-    document.getElementById('infobae-current-date').innerText = new Date().toLocaleDateString('es-PE', opcionesFecha);
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+<script>
+'use strict';
 
-    // 1. Polling de Alertas (PostgreSQL)
-    async function fetchAlertas() {
-      try {
-        const response = await fetch('/api/alertas');
-        if (!response.ok) return;
-        todasLasAlertas = await response.json();
+/* =====================================================================
+   Qhaway Medios · interfaz de revisión humana
+   Datos: /api/alertas, /api/eventos (decisiones y exportaciones, firmadas con
+   la persona que inició sesión), /api/resumen, /api/ticker y /api/analizar.
+   ===================================================================== */
 
-        // Contadores por radio y prensa
-        const vulnTotal = todasLasAlertas.filter(item => item.vulneracion_detectada);
-        const countRPP = vulnTotal.filter(v => (v.fuente || '').toLowerCase().includes('rpp')).length;
-        const countExitosa = vulnTotal.filter(v => (v.fuente || '').toLowerCase().includes('exitosa')).length;
+/* ---------- Utilidades ---------- */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+function esc(str) {
+  if (str === null || str === undefined) return '';
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+const pad2 = n => String(n).padStart(2, '0');
+const isoLocal = d => d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+const hoyISO = () => isoLocal(new Date());
+const fechaValida = iso => { const d = new Date(iso); return isNaN(d.getTime()) ? null : d; };
+const diaDe = iso => { const d = fechaValida(iso); return d ? isoLocal(d) : ''; };
+function fmtHora(iso, conSeg) {
+  const d = fechaValida(iso); if (!d) return '—';
+  return pad2(d.getHours()) + ':' + pad2(d.getMinutes()) + (conSeg ? ':' + pad2(d.getSeconds()) : '');
+}
+function fmtFechaHora(iso) {
+  const d = fechaValida(iso); if (!d) return '—';
+  return pad2(d.getDate()) + '/' + pad2(d.getMonth() + 1) + '/' + d.getFullYear() + ' ' + fmtHora(iso, true);
+}
+const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+const MESES_C = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+const DIAS = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+const partes = iso => iso.split('-').map(Number);
+const fechaLarga = (iso, conAnio) => { const [y, m, d] = partes(iso); return d + ' de ' + MESES[m - 1] + (conAnio ? ' de ' + y : ''); };
+const fechaCorta = (iso, conAnio) => { const [y, m, d] = partes(iso); return d + ' ' + MESES_C[m - 1] + (conAnio ? ' ' + y : ''); };
+const diaSemana = iso => { const [y, m, d] = partes(iso); return DIAS[new Date(y, m - 1, d).getDay()]; };
+function tiempoDesde(iso) {
+  const d = fechaValida(iso); if (!d) return '';
+  const min = Math.max(0, Math.floor((Date.now() - d.getTime()) / 60000));
+  if (min < 1) return 'instantes';
+  if (min < 60) return min + ' min';
+  const h = Math.floor(min / 60), m = min % 60;
+  if (h < 24) return h + ' h' + (m ? ' ' + m + ' min' : '');
+  const dd = Math.floor(h / 24);
+  return dd + (dd === 1 ? ' día' : ' días');
+}
+const plural = (n, uno, varios) => n + ' ' + (n === 1 ? uno : varios);
 
-        // Infobae
-        const infobaeItems = todasLasAlertas.filter(a => (a.fuente || '').toLowerCase().includes('infobae'));
-        const infobaeVulns = infobaeItems.filter(a => a.vulneracion_detectada).length;
+/* ---------- Constantes del modelo de datos ---------- */
+const MODELO_VERSION = 'llama3.2:3b (Ollama, local)';
+const TIPOS = {
+  'Estereotipo': { c: '#2a78d6', fg: '#FFFFFF', clip: 'circle(50% at 50% 50%)' },
+  'Culpabilización': { c: '#eb6834', fg: '#14161B', clip: 'inset(0 round 2px)' },
+  'Revictimización': { c: '#1baf7a', fg: '#14161B', clip: 'polygon(50% 0, 100% 100%, 0 100%)' },
+  'Normalización': { c: '#4a3aa7', fg: '#FFFFFF', clip: 'polygon(50% 0, 100% 50%, 50% 100%, 0 50%)' },
+  'Sin clasificar': { c: '#8A91A0', fg: '#14161B', clip: 'inset(0 round 2px)' }
+};
+const TIPOS_LISTA = ['Estereotipo', 'Culpabilización', 'Revictimización', 'Normalización'];
+const ESTADO_UI = {
+  pendiente: { txt: 'Pendiente', bg: '#FFFFFF', fg: '#14161B', bd: '#5F6572', largo: 'Pendiente de revisión' },
+  confirmada: { txt: 'Validada', bg: '#14161B', fg: '#FFFFFF', bd: '#14161B', largo: 'Confirmada por revisión humana' },
+  descartada: { txt: 'Descartada', bg: '#ECEEF2', fg: '#464C58', bd: '#ECEEF2', largo: 'Descartada por revisión humana' },
+  corregida: { txt: 'Corregida', bg: '#F7EAEE', fg: '#7A1F3D', bd: '#7A1F3D', largo: 'Corregida por revisión humana' }
+};
+const FUENTES = [
+  { id: 'rpp', n: 'RPP Noticias', kind: 'Radio' },
+  { id: 'exitosa', n: 'Radio Exitosa', kind: 'Radio' },
+  { id: 'infobae', n: 'Infobae Perú', kind: 'Prensa digital' }
+];
 
-        document.getElementById('count-rpp').innerText = countRPP;
-        document.getElementById('count-exitosa').innerText = countExitosa;
-        document.getElementById('count-infobae-total').innerText = infobaeItems.length;
-        document.getElementById('count-infobae-vuln').innerText = infobaeVulns;
-        document.getElementById('badge-total-vuln').innerText = `${vulnTotal.length} Alertas`;
+// Base normativa de referencia. «si» orienta al revisor sobre cuándo aplica cada norma.
+const NORMAS = [
+  { id: 'r125', n: 'Reglamento de la Ley N.° 30364 (D.S. N.° 009-2016-MIMP), art. 125', texto: 'Evitar la revictimización, respetar el derecho al silencio, no exponer a las víctimas a juicios de la comunidad y dar información sobre los servicios de atención.', si: 'el segmento revictimiza, culpa a la víctima o la expone a juicios de la comunidad.' },
+  { id: 'l46', n: 'Ley N.° 30364, art. 46', texto: 'Obligaciones de los medios: defender los derechos humanos y la dignidad de las víctimas. Reformado por la Ley N.° 32351 (2025).', si: 'el problema es el enfoque general del medio y no solo un juicio sobre la víctima.' },
+  { id: 'cna', n: 'Código de los Niños y Adolescentes (Ley N.° 27337), art. 6', texto: 'No divulgar datos que permitan identificar a niñas, niños y adolescentes víctimas o testigos. Criterio reforzado del enfoque generacional.', si: 'el segmento permite identificar a una niña, niño o adolescente víctima o testigo.' },
+  { id: 'pautas', n: 'Pautas del MIMP sobre tratamiento informativo', texto: 'Criterios sobre estereotipos, discriminación, revictimización y sensacionalismo.', si: 'hay estereotipos, sensacionalismo o lenguaje que normaliza o justifica la violencia.' },
+  { id: 'rm586', n: 'Resolución Ministerial N.° 586-2021-MTC/01, art. 10', texto: 'Criterio del MTC que recupera el módulo de contraste normativo.', si: 'el caso se evalúa con el criterio que usa el MTC para este módulo de contraste.' },
+  { id: 'rvm095', n: 'Lineamientos, R.V.M. N.° 095-2022-MTC/03', texto: 'Cumplimiento de las obligaciones de los medios.', si: 'se revisa el cumplimiento de las obligaciones de los medios de radiodifusión.' }
+];
+const normaPorId = id => NORMAS.find(n => n.id === id);
 
-        renderMuroRojo(vulnTotal);
-      } catch (err) {
-        console.error('Error cargando alertas:', err);
-      }
+const ICON = {
+  descarga: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>',
+  check: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none"><path d="M5 12.5l4.5 4.5L19 7"/></svg>',
+  x: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  lapiz: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1z"/></svg>',
+  libro: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none"><path d="M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3V4z"/><path d="M5 17a3 3 0 013-3h11"/></svg>',
+  flecha: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  chevI: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none"><path d="M15 6l-6 6 6 6"/></svg>',
+  chevD: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none"><path d="M9 6l6 6-6 6"/></svg>',
+  chevB: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none"><path d="M6 9l6 6 6-6"/></svg>',
+  escudo: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>'
+};
+
+/* ---------- Registro de decisiones (viene del servidor) ---------- */
+// Cada caso tiene una historia de eventos (validación, exportación) que solo crece.
+const Store = (() => {
+  let porAlerta = new Map(), vistos = new Set(), ultimo = 0, rev = 0;
+  return {
+    get rev() { return rev; },
+    get ultimo() { return ultimo; },
+    get(a) { return porAlerta.get(String(a.id)) || null; },
+    todos() { return Array.from(porAlerta.values()); },
+    reiniciar() { porAlerta = new Map(); vistos = new Set(); ultimo = 0; rev++; },
+    // desdePost: no adelanta el cursor, para no saltarse eventos de otras personas con id menor.
+    fusionar(lista, desdePost) {
+      let cambio = false;
+      lista.forEach(e => {
+        if (vistos.has(e.id)) return;
+        vistos.add(e.id);
+        const k = String(e.alerta_id);
+        let r = porAlerta.get(k);
+        if (!r) { r = { id: k, fuente: e.fuente, ts: e.alerta_ts, historial: [] }; porAlerta.set(k, r); }
+        r.historial.push({ id: e.id, tipo: e.tipo, decision: e.decision, tipo_final: e.tipo_final, comentario: e.comentario, norma: e.norma, modelo: e.modelo, archivo: e.archivo, revisor: e.revisor, fecha: e.creado });
+        r.historial.sort((x, y) => x.id - y.id);
+        if (!desdePost && e.id > ultimo) ultimo = e.id;
+        cambio = true;
+      });
+      if (cambio) rev++;
+      return cambio;
     }
+  };
+})();
 
-    function renderMuroRojo(items) {
-      if (!items || items.length === 0) {
-        wallContainer.innerHTML = `
-          <div class="glass-panel rounded-2xl p-10 text-center border border-slate-800">
-            <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 mx-auto flex items-center justify-center mb-3">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <h3 class="text-sm font-bold text-slate-200">Sin Infracciones Detectadas en este momento</h3>
-            <p class="text-xs text-slate-400 mt-1">El muro permanece limpio mientras las transmisiones y noticias cumplan la Ley 30364.</p>
-          </div>
-        `;
-        return;
-      }
+/* ---------- Reglas de clasificación ---------- */
+function tipoProblematica(raw) {
+  const s = String(raw || '').toLowerCase();
+  if (s.includes('culpab')) return 'Culpabilización';
+  if (s.includes('estereot')) return 'Estereotipo';
+  if (s.includes('normaliz') || s.includes('justific') || s.includes('minimiz')) return 'Normalización';
+  if (s.includes('revictim') || s.includes('exposici')) return 'Revictimización';
+  return 'Sin clasificar';
+}
+function medioDeFuente(fuente) {
+  const f = String(fuente || '').toLowerCase();
+  if (f.includes('rpp')) return 'RPP Noticias';
+  if (f.includes('exitosa')) return 'Radio Exitosa';
+  if (f.includes('infobae')) return 'Infobae Perú';
+  return fuente || 'Sin identificar';
+}
+const medioDe = a => medioDeFuente(a.fuente);
+const kindDeMedio = medio => { const f = FUENTES.find(x => x.n === medio); return f ? f.kind : 'Otra fuente'; };
+const kindDe = a => kindDeMedio(medioDe(a));
+const esDemoFuente = f => /demo|prueba|inyecci[oó]n/i.test(String(f || ''));
+const esDemo = a => esDemoFuente(a.fuente);
+const esSenal = a => Boolean(a.vulneracion_detectada);
+const tipoModeloDe = a => tipoProblematica(a.tipo_violencia);
 
-      wallContainer.innerHTML = items.map(item => {
-        const date = new Date(item.timestamp);
-        const timeStr = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        const dateStr = date.toLocaleDateString();
-
-        return `
-          <div class="glass-panel alert-glow rounded-2xl p-5 md:p-6 border-2 border-rose-500/80 bg-gradient-to-r from-rose-950/40 via-slate-900/95 to-slate-900/95 relative overflow-hidden transition-all hover:scale-[1.005]">
-            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 via-red-500 to-amber-500"></div>
-
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 pb-3.5 border-b border-rose-500/20">
-              <div class="flex flex-wrap items-center gap-2">
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-black bg-rose-600 text-white shadow-md shadow-rose-600/40 tracking-wider uppercase animate-pulse">
-                  🚨 ALERTA ROJA LEY 30364
-                </span>
-                <span class="text-xs font-bold text-rose-300 tracking-wide uppercase px-2.5 py-0.5 rounded-lg bg-rose-950/80 border border-rose-700/60">
-                  ${escapeHtml(item.tipo_violencia || 'Violencia Mediática')}
-                </span>
-              </div>
-              <div class="text-xs text-slate-400 font-mono flex items-center space-x-2">
-                <span>📰 ${escapeHtml(item.fuente)}</span>
-                <span>•</span>
-                <span>${dateStr} ${timeStr}</span>
-                <span>•</span>
-                <span class="text-rose-400 font-bold">#ID-${item.id}</span>
-              </div>
-            </div>
-
-            <div class="mt-4 space-y-3">
-              ${item.cita_exacta ? `
-                <div class="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200">
-                  <p class="text-[11px] font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5 mb-1">
-                    <svg class="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
-                    Cita Textual Infractora:
-                  </p>
-                  <p class="text-sm font-semibold italic text-amber-100 pl-4">
-                    "${escapeHtml(item.cita_exacta)}"
-                  </p>
-                </div>
-              ` : ''}
-
-              ${item.justificacion_legal ? `
-                <div class="p-3.5 rounded-xl bg-rose-950/40 border border-rose-500/30 text-rose-200">
-                  <p class="text-[11px] font-bold uppercase tracking-wider text-rose-400 flex items-center gap-1.5 mb-1">
-                    ⚖️ Marco Jurídico Vulnerado:
-                  </p>
-                  <p class="text-xs leading-relaxed text-rose-100 font-medium">
-                    ${escapeHtml(item.justificacion_legal)}
-                  </p>
-                </div>
-              ` : ''}
-
-              <details class="text-xs text-slate-400 pt-1 group cursor-pointer">
-                <summary class="hover:text-slate-200 font-mono transition">Ver contenido completo analizado...</summary>
-                <p class="mt-2 text-xs text-slate-300 bg-slate-950/80 p-3 rounded-lg border border-slate-800 leading-relaxed font-mono">
-                  "${escapeHtml(item.texto_analizado)}"
-                </p>
-              </details>
-            </div>
-
-          </div>
-        `;
-      }).join('');
+function estadoDe(a) {
+  const r = Store.get(a);
+  const evs = r ? r.historial.filter(e => e.tipo === 'validacion') : [];
+  const ev = evs.length ? evs[evs.length - 1] : null;
+  return { clave: ev ? ev.decision : 'pendiente', ev };
+}
+const grupoDe = clave => clave === 'pendiente' ? 'pend' : (clave === 'descartada' ? 'desc' : 'val');
+function tipoFinalDe(a) {
+  const { ev } = estadoDe(a);
+  return (ev && ev.tipo_final) || tipoModeloDe(a);
+}
+function esMenor(a) { return /menor|niñ|adolescente|27337/i.test(String(a.tipo_violencia || '') + ' ' + String(a.justificacion_legal || '')); }
+// Norma que propone el sistema a partir de lo que detectó el modelo.
+function normaPropuesta(a) {
+  if (esMenor(a)) return normaPorId('cna');
+  const t = tipoModeloDe(a);
+  if (t === 'Estereotipo' || t === 'Normalización') return normaPorId('pautas');
+  return normaPorId('r125');
+}
+// Norma vigente del caso: la corregida por la persona revisora o la propuesta.
+function normaVigente(a) {
+  const { ev } = estadoDe(a);
+  if (ev && ev.norma) {
+    const base = normaPorId(ev.norma.id);
+    return { nombre: ev.norma.nombre, texto: base ? base.texto : 'Norma indicada por la persona revisora; no fue recuperada por el sistema.', corregida: true, original: ev.norma.original };
+  }
+  const p = normaPropuesta(a);
+  return { nombre: p.n, texto: p.texto, corregida: false, original: null };
+}
+function tituloCaso(a) {
+  const t = tipoFinalDe(a);
+  return t === 'Sin clasificar' ? 'Señal sin clasificar' : 'Posible ' + t.toLowerCase();
+}
+function trazaDe(a) {
+  const out = [{ fecha: a.timestamp, color: '#14161B', titulo: 'Detectada por el modelo', detalle: 'Modelo ' + MODELO_VERSION + '. Fuente: ' + medioDe(a) + '.' }];
+  const r = Store.get(a);
+  (r ? r.historial : []).forEach(e => {
+    if (e.tipo === 'validacion') {
+      const que = e.decision === 'confirmada' ? 'Validada' : e.decision === 'descartada' ? 'Descartada' : 'Corregida a ' + e.tipo_final;
+      let det = e.revisor + ' · versión del modelo ' + e.modelo + '.';
+      if (e.norma) det += ' Normativa corregida: de «' + e.norma.original + '» a «' + e.norma.nombre + '».';
+      if (e.comentario) det += ' Comentario: «' + e.comentario + '»';
+      out.push({ fecha: e.fecha, color: '#FFE48F', titulo: 'Decisión: ' + que + (e.norma ? ' · normativa corregida' : ''), detalle: det });
+    } else if (e.tipo === 'exportacion') {
+      out.push({ fecha: e.fecha, color: '#14161B', titulo: 'Expediente exportado en PDF', detalle: e.revisor + ' · ' + e.archivo });
     }
+  });
+  return out;
+}
 
-    // 2. MODAL DE INFOBAE CON CLASES CONDICIONALES
-    function abrirModalInfobae() {
-      const modal = document.getElementById('modal-infobae');
-      const body = document.getElementById('modal-infobae-body');
-      modal.classList.remove('hidden');
+/* ---------- Piezas visuales ---------- */
+function tipoHTML(t) {
+  const x = TIPOS[t] || TIPOS['Sin clasificar'];
+  return '<span class="tipo"><span class="shape" aria-hidden="true" style="background:' + x.c + ';clip-path:' + x.clip + '"></span>' + esc(t) + '</span>';
+}
+function pillHTML(clave) {
+  const e = ESTADO_UI[clave];
+  return '<span class="pill" style="background:' + e.bg + ';color:' + e.fg + ';border-color:' + e.bd + '">' + e.txt + '</span>';
+}
+function confianzaHTML(a) {
+  const c = a && a.confianza ? String(a.confianza) : '';
+  return c ? '<span class="r-conf">Confianza: <strong>' + esc(c) + '</strong></span>' : '';
+}
+function resaltar(texto, cita) {
+  const t = String(texto || '');
+  if (!cita) return esc(t);
+  const i = t.toLowerCase().indexOf(String(cita).toLowerCase());
+  if (i < 0) return esc(t);
+  return esc(t.slice(0, i)) + '<mark class="frag">' + esc(t.slice(i, i + cita.length)) + '</mark>' + esc(t.slice(i + cita.length));
+}
+let toastTimer = null;
+function toast(msg, error) {
+  const el = $('#toast');
+  el.className = 'toast' + (error ? ' err-t' : '');
+  el.textContent = msg;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.add('hidden'), 4500);
+}
 
-      const infobaeItems = todasLasAlertas.filter(a => (a.fuente || '').toLowerCase().includes('infobae'));
-      document.getElementById('modal-badge-count').innerText = `${infobaeItems.length} noticias analizadas`;
+/* ---------- Estado de la aplicación ---------- */
+const POR_PAGINA = 10; // casos por página en Monitoreo
+const state = {
+  user: null, hayUsuarios: true,
+  alertas: [], porId: new Map(), online: true, ultimaCarga: null,
+  hayMas: false, anteriores: false, cargando: false, cubriendo: false, sincronizando: false,
+  vista: 'monitoreo', firma: '',
+  mon: { filtro: 'pend', desde: hoyISO(), hasta: hoyISO(), pagina: 1 },
+  det: { tab: 'pend', id: null, idPendiente: null, draft: null, limite: 30 },
+  obs: { desde: (() => { const d = new Date(); d.setDate(d.getDate() - 52); return isoLocal(d); })(), hasta: hoyISO(), medio: 'todos', tabla: false },
+  ticker: null
+};
 
-      if (infobaeItems.length === 0) {
-        body.innerHTML = `
-          <div class="text-center py-12 text-slate-400">
-            <div class="w-12 h-12 rounded-full bg-slate-800 mx-auto flex items-center justify-center text-xl mb-3">📰</div>
-            <h4 class="font-bold text-white text-sm">No hay publicaciones de Infobae registradas aún</h4>
-            <p class="text-xs text-slate-500 mt-1">Inicia el script <code class="px-1.5 py-0.5 rounded bg-slate-800 text-orange-400 font-mono">ejecutar_scraper_infobae.bat</code> para comenzar a extraer noticias.</p>
-          </div>
-        `;
-        return;
-      }
+/* ---------- Navegación ---------- */
+const VISTAS = ['monitoreo', 'detalle', 'observatorio'];
+const TABS_HASH = { pendientes: 'pend', validadas: 'val', descartadas: 'desc' };
 
-      body.innerHTML = infobaeItems.map(item => {
-        const date = new Date(item.timestamp);
-        const timeStr = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-        if (item.vulneracion_detectada) {
-          // CLASE CONDICIONAL: INFRACCIÓN (BORDE Y FONDO ROJO DESTACADO)
-          return `
-            <div class="p-4 rounded-xl border-2 border-rose-500 bg-rose-950/40 shadow-lg shadow-rose-950/30 transition">
-              <div class="flex items-center justify-between pb-2 border-b border-rose-500/30 mb-2.5">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-black bg-rose-600 text-white uppercase tracking-wider animate-pulse">
-                  🚨 INFRACCIÓN LEY 30364
-                </span>
-                <span class="text-xs font-mono text-slate-400">${timeStr}</span>
-              </div>
-              <p class="text-sm font-semibold text-rose-100 mb-2">
-                "${escapeHtml(item.texto_analizado)}"
-              </p>
-              ${item.cita_exacta ? `
-                <div class="p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs mb-2">
-                  <strong>Cita Infractora:</strong> "${escapeHtml(item.cita_exacta)}"
-                </div>
-              ` : ''}
-              ${item.justificacion_legal ? `
-                <div class="text-xs text-rose-300">
-                  <strong>Justificación Legal:</strong> ${escapeHtml(item.justificacion_legal)}
-                </div>
-              ` : ''}
-            </div>
-          `;
-        } else {
-          // CLASE CONDICIONAL: NOTICIA SEGURA (ESTILO SUTIL LIMPIO)
-          return `
-            <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/50 hover:border-slate-700 transition">
-              <div class="flex items-center justify-between pb-2 border-b border-slate-800 mb-2">
-                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                  ✅ Noticia Conforme
-                </span>
-                <span class="text-xs font-mono text-slate-500">${timeStr}</span>
-              </div>
-              <p class="text-xs text-slate-300 leading-relaxed font-mono">
-                "${escapeHtml(item.texto_analizado)}"
-              </p>
-            </div>
-          `;
-        }
-      }).join('');
+function aplicarHash() {
+  const [v, p2] = location.hash.replace(/^#\/?/, '').split('/');
+  state.vista = VISTAS.includes(v) ? v : 'monitoreo';
+  if (state.vista === 'detalle' && p2) {
+    if (TABS_HASH[p2]) { state.det.tab = TABS_HASH[p2]; state.det.id = null; state.det.draft = null; }
+    else if (/^\d+$/.test(p2)) {
+      if (state.porId.get(p2)) seleccionarCaso(p2, true); else state.det.idPendiente = p2;
     }
+  }
+}
+function mostrarVista() {
+  if (!state.user) return;
+  aplicarHash();
+  $$('[data-view]').forEach(s => s.classList.toggle('hidden', s.dataset.view !== state.vista));
+  $$('[data-nav]').forEach(a => { if (a.dataset.nav === state.vista) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+  if (state.vista === 'monitoreo') renderMonitoreo();
+  if (state.vista === 'detalle') { asegurarSeleccion(); renderRail(); renderDetalle(); }
+  if (state.vista === 'observatorio') renderObservatorio();
+  window.scrollTo({ top: 0 });
+}
+/* ---------- Generador mínimo de PDF (texto, A4, sin dependencias) ---------- */
+const PDF = (function () {
+  const W = 595.28, H = 841.89, M = 56;
+  const COLS = { ink: '0.078 0.086 0.106', gris: '0.275 0.298 0.345', claro: '0.45 0.47 0.51', marca: '0.478 0.122 0.239', hl: '1 0.894 0.561', linea: '0.78 0.8 0.84', blanco: '1 1 1' };
 
-    function cerrarModalInfobae() {
-      document.getElementById('modal-infobae').classList.add('hidden');
+  // Anchos Helvetica / Helvetica-Bold (AFM) para ASCII 32..126, en milésimas de em.
+  const WR = [278,278,355,556,556,889,667,191,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,278,278,584,584,584,556,1015,667,667,722,722,667,611,778,722,278,500,667,556,833,722,778,667,778,722,667,611,722,667,944,667,667,611,278,278,278,469,556,333,556,556,500,556,556,278,556,556,222,222,500,222,833,556,556,556,556,333,500,278,556,500,722,500,500,500,334,260,334,584];
+  const WB = [278,333,474,556,556,889,722,238,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,333,333,584,584,584,611,975,722,722,722,722,667,611,778,722,278,556,722,611,833,722,778,667,778,722,667,611,722,667,944,667,667,611,333,278,333,584,556,333,556,611,556,611,556,333,611,611,278,278,556,278,889,611,611,611,611,389,556,333,611,556,778,556,556,500,389,280,389,584];
+
+  const WIN = { 8364: 0x80, 8218: 0x82, 8222: 0x84, 8230: 0x85, 8224: 0x86, 8225: 0x87, 8240: 0x89, 8249: 0x8B, 8216: 0x91, 8217: 0x92, 8220: 0x93, 8221: 0x94, 8226: 0x95, 8211: 0x96, 8212: 0x97, 8482: 0x99, 8250: 0x9B };
+
+  function limpiar(s) { return String(s == null ? '' : s).replace(/[\r\n\t]+/g, ' ').replace(/ {2,}/g, ' '); }
+  function ancho(s, size, bold) {
+    const T = bold ? WB : WR; let w = 0;
+    for (const ch of s) {
+      let c = ch.codePointAt(0);
+      if (c > 126) { const b = ch.normalize('NFD').charCodeAt(0); c = (b >= 32 && b <= 126) ? b : 0; }
+      w += (c >= 32 && c <= 126) ? T[c - 32] : (c === 0 ? 556 : 556);
     }
-
-    // Cerrar modal al hacer clic en fondo o con ESC
-    document.getElementById('modal-infobae').addEventListener('click', function(e) {
-      if (e.target === this) cerrarModalInfobae();
-    });
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') cerrarModalInfobae();
-    });
-
-    // 3. Polling del Ticker en Vivo (Whisper)
-    let lastRppText = '';
-    let lastExitosaText = '';
-
-    async function fetchLiveTicker() {
-      try {
-        const res = await fetch('/api/ticker');
-        if (!res.ok) return;
-        const data = await res.json();
-
-        if (data.rpp && data.rpp.texto && data.rpp.texto !== lastRppText) {
-          lastRppText = data.rpp.texto;
-          const el = document.getElementById('stream-rpp');
-          el.innerText = `"${data.rpp.texto}"`;
-          el.classList.remove('stream-fade');
-          void el.offsetWidth;
-          el.classList.add('stream-fade');
-          document.getElementById('time-rpp').innerText = new Date(data.rpp.timestamp).toLocaleTimeString();
-        }
-
-        if (data.exitosa && data.exitosa.texto && data.exitosa.texto !== lastExitosaText) {
-          lastExitosaText = data.exitosa.texto;
-          const el = document.getElementById('stream-exitosa');
-          el.innerText = `"${data.exitosa.texto}"`;
-          el.classList.remove('stream-fade');
-          void el.offsetWidth;
-          el.classList.add('stream-exitosa');
-          document.getElementById('time-exitosa').innerText = new Date(data.exitosa.timestamp).toLocaleTimeString();
-        }
-      } catch (e) {}
+    return w * size / 1000;
+  }
+  function octal(s) {
+    let out = '';
+    for (const ch of s) {
+      let c = ch.codePointAt(0);
+      if (c < 32) continue;
+      if (c > 126) { if (c >= 160 && c <= 255) { /* latin-1 */ } else if (WIN[c]) c = WIN[c]; else c = 63; }
+      if (c === 40 || c === 41 || c === 92) out += '\\' + String.fromCharCode(c);
+      else if (c >= 32 && c <= 126) out += String.fromCharCode(c);
+      else out += '\\' + c.toString(8).padStart(3, '0');
     }
+    return out;
+  }
 
-    // Inyección de Prueba desde la UI
-    async function dispararInyeccionUI() {
-      const btn = document.getElementById('btn-inject-demo');
-      const original = btn.innerHTML;
-      btn.disabled = true;
-      btn.innerHTML = `<span class="animate-spin mr-1">⌛</span> Analizando en GPU...`;
-
-      try {
-        const payload = {
-          fuente: "Inyección Demo - Caso Liceo Naval",
-          texto: "En vivo desde los exteriores del Liceo Naval. Se ha filtrado la identidad de la escolar de 14 años de iniciales V.S. o Valeria Sánchez, quien acusa al instructor militar de agresión y tocamientos."
-        };
-
-        const res = await fetch('/api/analizar', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+  function nuevo(pie) {
+    const pages = []; let cur = null; let y = 0;
+    function pagina() { cur = []; pages.push(cur); y = H - M; }
+    pagina();
+    function asegurar(alto) { if (y - alto < M + 24) pagina(); }
+    function puts(x, yy, s, size, bold, col) {
+      cur.push('BT /' + (bold ? 'F2' : 'F1') + ' ' + size + ' Tf ' + COLS[col || 'ink'] + ' rg 1 0 0 1 ' + x.toFixed(2) + ' ' + yy.toFixed(2) + ' Tm (' + octal(s) + ') Tj ET');
+    }
+    // Divide en líneas de palabras con marca de resaltado opcional.
+    function lineas(tokens, maxW, size, bold) {
+      const out = []; let linea = []; let w = 0; const sp = ancho(' ', size, bold);
+      tokens.forEach((t) => {
+        const tw = ancho(t.w, size, bold);
+        if (linea.length && w + sp + tw > maxW) { out.push(linea); linea = []; w = 0; }
+        w += (linea.length ? sp : 0) + tw; linea.push(t);
+      });
+      if (linea.length) out.push(linea);
+      return out;
+    }
+    function tokens(texto, resaltar) {
+      const t = limpiar(texto); const out = [];
+      let ini = -1, fin = -1;
+      if (resaltar) { const i = t.toLowerCase().indexOf(limpiar(resaltar).toLowerCase()); if (i >= 0) { ini = i; fin = i + limpiar(resaltar).length; } }
+      const re = /\S+/g; let m;
+      while ((m = re.exec(t))) out.push({ w: m[0], hl: ini >= 0 && m.index < fin && m.index + m[0].length > ini });
+      return out;
+    }
+    const api = {
+      texto(txt, o) {
+        o = o || {}; const size = o.size || 10, bold = !!o.bold, x0 = M + (o.sangria || 0), maxW = W - M - x0, lh = o.lh || size * 1.45;
+        const ls = lineas(tokens(txt, o.resaltar), maxW, size, bold);
+        ls.forEach((l) => {
+          asegurar(lh);
+          const sp = ancho(' ', size, bold); let x = x0, runIni = null;
+          // fondo del resaltado
+          l.forEach((t, i) => {
+            const tw = ancho(t.w, size, bold);
+            if (t.hl) { if (runIni === null) runIni = x; }
+            const finRun = t.hl && !(l[i + 1] && l[i + 1].hl);
+            if (finRun) { cur.push(COLS.hl + ' rg ' + (runIni - 1).toFixed(2) + ' ' + (y - 3).toFixed(2) + ' ' + (x + tw - runIni + 2).toFixed(2) + ' ' + (size + 3).toFixed(2) + ' re f'); runIni = null; }
+            x += tw + sp;
+          });
+          puts(x0, y - size * 0.1, l.map((t) => t.w).join(' '), size, bold, o.color);
+          y -= lh;
         });
+        y -= (o.despues == null ? 0 : o.despues);
+      },
+      titulo(txt, size) { asegurar(size * 2); this.texto(txt, { size: size || 18, bold: true, lh: (size || 18) * 1.25, despues: 4 }); },
+      seccion(txt) { asegurar(40); y -= 8; this.texto(txt.toUpperCase(), { size: 8.5, bold: true, color: 'gris', despues: 4 }); },
+      par(etiqueta, valor) {
+        asegurar(28);
+        this.texto(etiqueta, { size: 8, color: 'claro', lh: 11 });
+        this.texto(valor || '—', { size: 10, bold: true, despues: 5 });
+      },
+      regla(grosor) { asegurar(10); cur.push(COLS.ink + ' RG ' + (grosor || 0.8) + ' w ' + M + ' ' + (y - 2).toFixed(2) + ' m ' + (W - M) + ' ' + (y - 2).toFixed(2) + ' l S'); y -= 10; },
+      espacio(n) { y -= n; },
+      reservar(h) { asegurar(h); },
+      bajar(h) { y -= h; },
+      // Rectángulo relleno; ytop es el borde superior.
+      rect(x, ytop, w, h, hex) {
+        const n = parseInt(String(hex).replace('#', ''), 16);
+        const c = ((n >> 16) & 255) / 255 + ' ' + ((n >> 8) & 255) / 255 + ' ' + (n & 255) / 255;
+        cur.push(c.split(' ').map((v) => (+v).toFixed(3)).join(' ') + ' rg ' + x.toFixed(2) + ' ' + (ytop - h).toFixed(2) + ' ' + w.toFixed(2) + ' ' + h.toFixed(2) + ' re f');
+      },
+      // Texto suelto en una posición horizontal; con derecha:true, x es el borde derecho.
+      celda(x, txt, o) {
+        o = o || {}; const size = o.size || 10, s2 = limpiar(txt), w = ancho(s2, size, !!o.bold);
+        puts(o.derecha ? x - w : x, (o.y == null ? y : o.y) - size, s2, size, !!o.bold, o.color);
+      },
+      pdf(meta) {
+        const total = pages.length; const objs = [];
+        const kids = [];
+        // 1 catálogo, 2 páginas, 3 y 4 fuentes, 5 info; luego (página, contenido) por cada hoja
+        pages.forEach((p, i) => {
+          const pie2 = pie + ' · Página ' + (i + 1) + ' de ' + total;
+          const extra = ['0.78 0.8 0.84 RG 0.5 w ' + M + ' ' + (M - 4) + ' m ' + (W - M) + ' ' + (M - 4) + ' l S'];
+          extra.push('BT /F1 8 Tf ' + COLS.claro + ' rg 1 0 0 1 ' + M + ' ' + (M - 18) + ' Tm (' + octal(pie2) + ') Tj ET');
+          const stream = p.concat(extra).join('\n');
+          const pageNo = 6 + i * 2, contNo = 7 + i * 2;
+          kids.push(pageNo + ' 0 R');
+          objs[pageNo] = '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + W + ' ' + H + '] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents ' + contNo + ' 0 R >>';
+          objs[contNo] = '<< /Length ' + stream.length + ' >>\nstream\n' + stream + '\nendstream';
+        });
+        objs[1] = '<< /Type /Catalog /Pages 2 0 R >>';
+        objs[2] = '<< /Type /Pages /Kids [' + kids.join(' ') + '] /Count ' + total + ' >>';
+        objs[3] = '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>';
+        objs[4] = '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>';
+        objs[5] = '<< /Title (' + octal(meta.titulo) + ') /Producer (Qhaway Medios) >>';
+        let out = '%PDF-1.4\n'; const off = [];
+        for (let n = 1; n < objs.length; n++) { off[n] = out.length; out += n + ' 0 obj\n' + objs[n] + '\nendobj\n'; }
+        const xref = out.length;
+        out += 'xref\n0 ' + objs.length + '\n0000000000 65535 f \n';
+        for (let n = 1; n < objs.length; n++) out += String(off[n]).padStart(10, '0') + ' 00000 n \n';
+        out += 'trailer\n<< /Size ' + objs.length + ' /Root 1 0 R /Info 5 0 R >>\nstartxref\n' + xref + '\n%%EOF\n';
+        const bytes = new Uint8Array(out.length);
+        for (let i = 0; i < out.length; i++) bytes[i] = out.charCodeAt(i) & 255;
+        return bytes;
+      },
+      marca() { cur.push(COLS.marca + ' rg ' + M + ' ' + (y - 14).toFixed(2) + ' 16 16 re f'); },
+      get y() { return y; }, set y(v) { y = v; }
+    };
+    return api;
+  }
 
-        if (!res.ok) throw new Error('Error al inyectar');
-        await fetchAlertas();
-      } catch (err) {
-        alert('Error: ' + err.message);
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = original;
+  // Expediente de un caso revisado: confirmado (con o sin correcciones) o descartado.
+  function expediente(d) {
+    const desc = !!d.descartada;
+    const correcciones = d.correcciones || [];
+    const doc = nuevo('Qhaway Medios · ' + d.exp + ' · Confidencial');
+    doc.marca();
+    doc.texto('Qhaway Medios', { size: 14, bold: true, sangria: 24, lh: 16 });
+    doc.texto(desc ? 'Expediente de descarte' : 'Expediente de evidencia', { size: 8.5, color: 'claro', sangria: 24, lh: 10, despues: 2 });
+    doc.texto(d.exp + '  ·  Emitido el ' + d.emitido, { size: 9, color: 'gris', despues: 2 });
+    doc.regla(1.4);
+    doc.espacio(6);
+    doc.titulo(d.titulo, 18);
+    doc.texto(desc ? 'DESCARTADA POR REVISIÓN HUMANA' : (correcciones.length ? 'VALIDADA POR REVISIÓN HUMANA, CON CORRECCIONES' : 'VALIDADA POR REVISIÓN HUMANA'), { size: 9, bold: true, color: 'marca', despues: 3 });
+    doc.texto(desc
+      ? 'Señal preliminar generada por el sistema y descartada por una persona. Este registro conserva el motivo para la trazabilidad. Confidencial: puede contener material sensible; revisa el contenido antes de compartirlo.'
+      : 'Señal preliminar generada por el sistema y revisada por una persona. Confidencial: puede contener material sensible; revisa el contenido antes de compartirlo.', { size: 9, color: 'gris', despues: 6 });
+
+    let n = 1;
+    doc.seccion((n++) + ' · Identificación');
+    doc.par('Medio', d.medio);
+    doc.par('Tipo de fuente', d.kind);
+    doc.par('Fecha y hora de detección', d.emision);
+    doc.par(desc ? 'Tipo propuesto por el modelo' : 'Tipo de problemática', d.tipo);
+    if (!desc && d.tipoModelo && d.tipoModelo !== d.tipo) doc.par('Tipo propuesto por el modelo', d.tipoModelo);
+    doc.par('Etiqueta del modelo', d.etiqueta);
+
+    doc.seccion((n++) + ' · Transcripción');
+    doc.texto(d.texto, { size: 10.5, resaltar: d.cita, lh: 15, despues: 4 });
+    if (d.cita) doc.texto('Fragmento señalado: «' + d.cita + '»', { size: 9.5, bold: true, despues: 2 });
+
+    doc.seccion((n++) + (desc ? ' · Criterio normativo propuesto por el sistema (no confirmado)' : ' · Criterio normativo citado'));
+    doc.texto(d.norma.nombre, { size: 10.5, bold: true });
+    doc.texto(d.norma.texto, { size: 10, color: 'gris', despues: 4 });
+    if (d.normaCorregida) doc.texto('Normativa corregida por la persona revisora. Propuesta del sistema: ' + d.normaCorregida + '.', { size: 9, color: 'gris', despues: 4 });
+    doc.texto('Explicación del modelo: ' + (d.justificacion || 'el modelo no citó un criterio.'), { size: 10, color: 'gris', despues: 2 });
+
+    doc.seccion((n++) + (desc ? ' · Resultado de la revisión' : ' · Resultado de la validación'));
+    doc.par('Resultado', d.resultado);
+    doc.par(desc ? 'Revisó' : 'Validó', d.revisor);
+    doc.par(desc ? 'Fecha de la revisión' : 'Fecha de validación', d.fechaDecision);
+    doc.par('Versión del modelo', d.modelo);
+    if (desc) {
+      doc.par('Motivo del descarte', d.comentario);
+      doc.texto('La señal no fue confirmada por la persona revisora. No debe interpretarse como una infracción.', { size: 9, color: 'gris', despues: 2 });
+    } else {
+      doc.par('Comentario', d.comentario);
+      doc.seccion((n++) + ' · Correcciones de la persona revisora');
+      if (correcciones.length) {
+        correcciones.forEach((c) => {
+          doc.texto(c.campo, { size: 9.5, bold: true, lh: 13 });
+          doc.texto('Propuesta del sistema: ' + c.antes, { size: 9.5, color: 'gris', sangria: 12, lh: 13 });
+          doc.texto('Corrección: ' + c.despues, { size: 9.5, bold: true, sangria: 12, despues: 4 });
+        });
+        doc.texto('Motivo: ' + (d.comentario || '—'), { size: 9.5, color: 'gris', despues: 2 });
+      } else {
+        doc.texto('Sin correcciones: la persona revisora confirmó el tipo de problemática y la normativa que propuso el sistema.', { size: 10, color: 'gris', despues: 2 });
       }
     }
 
-    function escapeHtml(str) {
-      if (!str) return '';
-      return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+    doc.seccion((n++) + ' · Trazabilidad');
+    d.traza.forEach((t) => {
+      doc.texto(t.fecha + '  ·  ' + t.titulo, { size: 9.5, bold: true, lh: 13 });
+      if (t.detalle) doc.texto(t.detalle, { size: 9, color: 'gris', sangria: 12, despues: 3 });
+    });
+
+    doc.espacio(10); doc.regla(0.5);
+    doc.texto('Este expediente documenta una señal revisada por una persona. No determina infracciones ni sanciona: corresponde a la entidad competente evaluarlo conforme al debido proceso.', { size: 8.5, color: 'gris' });
+    return doc.pdf({ titulo: (desc ? 'Expediente de descarte ' : 'Expediente de evidencia ') + d.exp });
+  }
+
+  // Resumen del Observatorio: indicadores, barras por medio y tabla. Solo conteos, sin datos de víctimas.
+  function resumen(d) {
+    const doc = nuevo('Qhaway Medios · Resumen del Observatorio · Confidencial');
+    doc.marca();
+    doc.texto('Qhaway Medios', { size: 14, bold: true, sangria: 24, lh: 16 });
+    doc.texto('Observatorio de casos validados', { size: 8.5, color: 'claro', sangria: 24, lh: 10, despues: 2 });
+    doc.texto('Emitido el ' + d.emitido + (d.por ? ' por ' + d.por : ''), { size: 9, color: 'gris', despues: 2 });
+    doc.regla(1.4);
+    doc.espacio(6);
+    doc.titulo('Resumen de casos validados', 18);
+    doc.texto('Periodo: ' + d.rango + '  ·  Medio: ' + d.medio + '. El periodo se mide por la fecha de la decisión de la persona revisora.', { size: 9.5, color: 'gris', despues: 6 });
+
+    doc.seccion('1 · Indicadores');
+    d.indicadores.forEach((i) => { doc.par(i.etiqueta, i.valor); });
+
+    doc.seccion('2 · Casos validados por medio y tipo de problemática');
+    // Leyenda
+    doc.reservar(24);
+    let x = M;
+    d.tipos.forEach((t) => {
+      doc.rect(x, doc.y, 8, 8, t.color);
+      doc.celda(x + 12, t.nombre, { size: 8.5, y: doc.y + 0.5, color: 'gris' });
+      x += 12 + ancho(t.nombre, 8.5, false) + 16;
+    });
+    doc.bajar(20);
+    const max = Math.max(1, ...d.filas.map((f) => f.total));
+    const x0 = M + 150, anchoMax = W - M - x0 - 36;
+    d.filas.forEach((f) => {
+      doc.reservar(34);
+      const y0 = doc.y;
+      doc.celda(M, f.n, { size: 10, bold: true, y: y0 });
+      doc.celda(M, f.kind, { size: 8, color: 'claro', y: y0 - 12 });
+      let xs = x0;
+      d.tipos.forEach((t) => {
+        const v = f.por[t.nombre] || 0; if (!v) return;
+        const w = v / max * anchoMax;
+        doc.rect(xs, y0 + 2, w, 18, t.color);
+        if (w >= 14) doc.celda(xs + w / 2 - ancho(String(v), 8.5, true) / 2, String(v), { size: 8.5, bold: true, y: y0 - 4, color: t.claroTexto ? 'blanco' : 'ink' });
+        xs += w;
+      });
+      doc.celda(W - M, String(f.total), { size: 11, bold: true, derecha: true, y: y0 });
+      doc.bajar(32);
+    });
+
+    doc.seccion('3 · Tabla');
+    const cols = d.tipos.length + 1;
+    const colW = (W - 2 * M - 150) / cols;
+    doc.reservar(24);
+    let yh = doc.y;
+    doc.celda(M, 'Medio', { size: 8, bold: true, color: 'claro', y: yh });
+    d.tipos.forEach((t, i) => { doc.celda(M + 150 + colW * (i + 1) - 4, t.nombre, { size: 8, bold: true, color: 'claro', derecha: true, y: yh }); });
+    doc.celda(M + 150 + colW * cols - 4, 'Total', { size: 8, bold: true, color: 'claro', derecha: true, y: yh });
+    doc.bajar(16); doc.regla(0.4);
+    d.filas.forEach((f) => {
+      doc.reservar(18);
+      const yy = doc.y;
+      doc.celda(M, f.n, { size: 9.5, bold: true, y: yy });
+      d.tipos.forEach((t, i) => { doc.celda(M + 150 + colW * (i + 1) - 4, String(f.por[t.nombre] || 0), { size: 9.5, derecha: true, y: yy }); });
+      doc.celda(M + 150 + colW * cols - 4, String(f.total), { size: 9.5, bold: true, derecha: true, y: yy });
+      doc.bajar(16);
+    });
+
+    doc.espacio(10); doc.regla(0.5);
+    doc.texto('Conteo de casos validados, no un ranking ni una sanción. Sirve para ver recurrencias y orientar capacitaciones. No incluye nombres de víctimas ni fragmentos identificables; los casos de prueba no se cuentan.', { size: 8.5, color: 'gris' });
+    return doc.pdf({ titulo: 'Resumen del Observatorio ' + d.rango });
+  }
+
+  return { expediente, resumen };
+})();
+if (typeof module !== 'undefined') module.exports = PDF;
+
+/* ---------- Conexión con el servidor y sesión ---------- */
+// Llama a la API con la cookie de sesión. Si la sesión venció, vuelve a la pantalla de acceso.
+async function api(url, opciones) {
+  const o = Object.assign({ credentials: 'same-origin' }, opciones || {});
+  if (o.json !== undefined) {
+    o.method = o.method || 'POST';
+    o.headers = Object.assign({ 'Content-Type': 'application/json' }, o.headers);
+    o.body = JSON.stringify(o.json);
+    delete o.json;
+  }
+  const res = await fetch(url, o);
+  if (res.status === 401) { mostrarLogin('Tu sesión venció. Vuelve a entrar.'); throw new Error('sesión vencida'); }
+  return res;
+}
+async function errorDe(res) {
+  try { const j = await res.json(); if (j && j.error) return j.error; } catch (e) { /* sin cuerpo */ }
+  return 'el servidor respondió ' + res.status;
+}
+
+function mostrarLogin(mensaje) {
+  state.user = null;
+  state.alertas = []; state.porId.clear(); state.hayMas = false; state.anteriores = false; state.firma = '';
+  state.det.id = null; state.det.draft = null;
+  Store.reiniciar();
+  $('#app').classList.add('hidden');
+  $('#login').classList.remove('hidden');
+  $('#login-clave').value = '';
+  const e = $('#login-error');
+  e.textContent = mensaje || ''; e.classList.toggle('hidden', !mensaje);
+  $('#login-aviso').classList.toggle('hidden', state.hayUsuarios);
+  $('#login-usuario').focus();
+}
+function entrar(usuario) {
+  state.user = usuario;
+  $('#login').classList.add('hidden');
+  $('#app').classList.remove('hidden');
+  $('#usr-nombre').textContent = usuario.nombre;
+  $('#usr-ini').textContent = usuario.nombre.trim().split(/\s+/).slice(0, 2).map(p => p[0].toUpperCase()).join('');
+  mostrarVista();
+  sincronizar();
+}
+async function iniciarSesion(ev) {
+  ev.preventDefault();
+  const boton = $('#login-enviar'), e = $('#login-error');
+  const usuario = $('#login-usuario').value.trim(), clave = $('#login-clave').value;
+  if (!usuario || !clave) { e.textContent = 'Escribe tu usuario y tu contraseña.'; e.classList.remove('hidden'); return; }
+  boton.disabled = true; boton.textContent = 'Entrando…'; e.classList.add('hidden');
+  try {
+    const res = await fetch('/api/login', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ usuario, clave }) });
+    if (!res.ok) throw new Error(await errorDe(res));
+    const j = await res.json();
+    entrar(j.usuario);
+  } catch (err) {
+    e.textContent = err.message; e.classList.remove('hidden');
+    $('#login-clave').select();
+  } finally {
+    boton.disabled = false; boton.textContent = 'Entrar';
+  }
+}
+async function cerrarSesion() {
+  try { await fetch('/api/logout', { method: 'POST', credentials: 'same-origin' }); } catch (e) { /* aunque falle, se sale de la pantalla */ }
+  mostrarLogin();
+}
+
+/* ---------- Datos: alertas, decisiones y emisoras ---------- */
+function reconstruirLista() {
+  state.alertas = Array.from(state.porId.values()).sort((a, b) => Number(b.id) - Number(a.id));
+}
+// Trae lo más reciente (60 filas). Las páginas anteriores se piden aparte con cargarAnteriores().
+async function cargarAlertas() {
+  const res = await api('/api/alertas?limite=60');
+  if (!res.ok) throw new Error(await errorDe(res));
+  const lista = await res.json();
+  if (!Array.isArray(lista)) throw new Error('respuesta inesperada');
+  // Si la base se reinició, los ids empiezan de nuevo: se descarta lo cargado.
+  const maxConocido = state.alertas.length ? Number(state.alertas[0].id) : 0;
+  if (state.porId.size && (!lista.length || Number(lista[0].id) < maxConocido)) {
+    state.porId.clear(); state.anteriores = false; Store.reiniciar();
+  }
+  lista.forEach(a => state.porId.set(String(a.id), a));
+  if (!state.anteriores) state.hayMas = res.headers.get('X-Hay-Mas') === '1';
+  state.ultimaCarga = new Date();
+  reconstruirLista();
+  if (state.det.idPendiente && state.porId.get(state.det.idPendiente)) {
+    const id = state.det.idPendiente; state.det.idPendiente = null; seleccionarCaso(id, state.vista !== 'detalle');
+  }
+}
+async function cargarEventos() {
+  for (let i = 0; i < 10; i++) {
+    const res = await api('/api/eventos?despues=' + Store.ultimo);
+    if (!res.ok) throw new Error(await errorDe(res));
+    const lista = await res.json();
+    Store.fusionar(lista);
+    if (lista.length < 5000) break;
+  }
+}
+async function sincronizar() {
+  if (!state.user || state.sincronizando) return;
+  state.sincronizando = true;
+  try {
+    await Promise.all([cargarAlertas(), cargarEventos()]);
+    setConexion(true);
+  } catch (err) {
+    if (!state.user) return; // la sesión venció: ya se mostró el acceso
+    console.error('Error sincronizando con el servidor:', err);
+    setConexion(false);
+  } finally {
+    state.sincronizando = false;
+  }
+  if (state.user) { refrescar(); cubrirAuto(); }
+}
+// Pide la siguiente página de señales más antiguas.
+async function cargarAnteriores() {
+  if (state.cargando || !state.hayMas || !state.alertas.length) return false;
+  state.cargando = true; refrescar(true);
+  try {
+    const minId = Math.min(...state.alertas.map(a => Number(a.id)));
+    const res = await api('/api/alertas?limite=60&solo_senales=1&antes=' + minId);
+    if (!res.ok) throw new Error(await errorDe(res));
+    const lista = await res.json();
+    lista.forEach(a => state.porId.set(String(a.id), a));
+    state.anteriores = true;
+    state.hayMas = res.headers.get('X-Hay-Mas') === '1';
+    reconstruirLista();
+    state.cargando = false; refrescar(true);
+    return lista.length > 0;
+  } catch (err) {
+    state.cargando = false; refrescar(true);
+    if (state.user) toast('No se pudieron cargar los casos anteriores: ' + err.message, true);
+    return false;
+  }
+}
+// Carga páginas anteriores hasta cubrir el periodo elegido en Monitoreo (con un tope).
+async function cubrirRango(desde) {
+  for (let i = 0; i < 25 && state.hayMas; i++) {
+    const masViejo = state.alertas.filter(esSenal).reduce((m, a) => { const d = diaDe(a.timestamp); return !m || d < m ? d : m; }, '');
+    // Se detiene cuando ya se cargó algo anterior al primer día del periodo (así el primer día queda completo).
+    if (masViejo && masViejo < desde) break;
+    if (!(await cargarAnteriores())) break;
+  }
+}
+// Lo hace solo: se revisa en cada sincronización y al cambiar las fechas.
+function cubrirAuto() {
+  if (state.cubriendo || !state.hayMas || state.cargando || !state.user) return;
+  state.cubriendo = true;
+  cubrirRango(state.mon.desde).finally(() => { state.cubriendo = false; });
+}
+// Guarda un evento (decisión o exportación) en el servidor; la firma la pone el servidor.
+async function registrarEvento(cuerpo) {
+  const res = await api('/api/eventos', { json: cuerpo });
+  if (!res.ok) throw new Error(await errorDe(res));
+  const evento = await res.json();
+  Store.fusionar([evento], true);
+  return evento;
+}
+function setConexion(ok) {
+  state.online = ok;
+  $('#dot').className = 'dot' + (ok ? '' : ' off');
+  $('#conn').title = ok ? 'Conectado con el servidor' : 'Sin conexión con el servidor: se muestran los últimos datos recibidos';
+}
+async function fetchTicker() {
+  if (!state.user) return;
+  try {
+    const res = await fetch('/api/ticker');
+    if (!res.ok) return;
+    state.ticker = await res.json();
+    if (state.vista === 'monitoreo') renderEmisoras();
+  } catch (e) { /* el ticker es opcional */ }
+}
+
+// Redibuja solo lo que cambió, para no pisar lo que la persona está escribiendo.
+function refrescar(forzar) {
+  const pend = state.alertas.filter(a => esSenal(a) && estadoDe(a).clave === 'pendiente').length;
+  const b = $('#nav-badge');
+  b.textContent = pend; b.classList.toggle('hidden', pend === 0);
+  const firma = [
+    state.alertas.map(a => a.id + (esSenal(a) ? 'v' : 'n') + estadoDe(a).clave).join(','),
+    Store.rev, state.vista, state.online, state.hayMas, state.cargando, Math.floor(Date.now() / 30000)
+  ].join('|');
+  if (!forzar && firma === state.firma) return;
+  state.firma = firma;
+  if (state.vista === 'monitoreo') renderMonitoreoDatos();
+  if (state.vista === 'detalle') {
+    const cambio = asegurarSeleccion();
+    renderRail();
+    if (cambio) renderDetalle();
+  }
+  if (state.vista === 'observatorio') renderObservatorioDatos();
+}
+
+/* =====================================================================
+   1 · MONITOREO DE CASOS
+   ===================================================================== */
+let monConstruido = false;
+function renderMonitoreo() {
+  if (!monConstruido) {
+    $('#view-monitoreo').innerHTML = `
+      <div class="principle">${ICON.escudo}<p><strong style="font-weight:600">Una persona revisa cada señal.</strong> El sistema documenta y notifica; no determina infracciones, no sanciona ni publica resultados de forma autónoma.</p></div>
+      <div class="title-row">
+        <div>
+          <h1 class="h1">Monitoreo de casos</h1>
+          <p class="sub" id="mon-sub"></p>
+        </div>
+        <div class="title-ctrl">
+          <div class="ctrl-row">
+            <div class="fgroup"><label class="lbl" for="mon-desde">Desde</label><input id="mon-desde" class="in" type="date"></div>
+            <div class="fgroup"><label class="lbl" for="mon-hasta">Hasta</label><input id="mon-hasta" class="in" type="date"></div>
+            <button type="button" class="btn" data-act="mon-hoy">Hoy</button>
+          </div>
+          <p class="status" id="mon-status"></p>
+        </div>
+      </div>
+      <section class="tiles" aria-label="Resumen" id="mon-tiles"></section>
+      <div class="cols">
+        <section class="card list" aria-labelledby="h-cola">
+          <div class="card-head">
+            <h2 id="h-cola">Señales preliminares</h2>
+            <p class="h2-sub" style="margin-bottom:0">Posibles malas prácticas comunicativas, pendientes de evaluación humana</p>
+          </div>
+          <div class="tabs" role="group" aria-label="Filtrar por estado" id="mon-tabs"></div>
+          <div id="mon-list"></div>
+        </section>
+        <aside class="side">
+          <section class="card" style="padding:18px 20px" aria-labelledby="h-emi">
+            <h2 class="h2" id="h-emi">Emisoras en monitoreo</h2>
+            <p class="h2-sub" style="margin-bottom:6px">Radio en vivo y prensa digital</p>
+            <div id="mon-emi"></div>
+          </section>
+          <section class="card pad stack g12" aria-labelledby="h-prueba">
+            <h2 class="h2" id="h-prueba">Caso de prueba</h2>
+            <p style="font-size:14px;color:var(--ink2)">Envía un texto de ejemplo al modelo para recorrer el flujo completo: detección, revisión y exportación.</p>
+            <button type="button" class="btn" id="btn-inyectar" data-act="inyectar" style="align-self:flex-start">Inyectar caso de prueba</button>
+          </section>
+        </aside>
+      </div>`;
+    monConstruido = true;
+  }
+  renderMonitoreoDatos();
+}
+
+function enRangoMon() {
+  const m = state.mon;
+  return state.alertas.filter(esSenal).filter(a => { const d = diaDe(a.timestamp); return d >= m.desde && d <= m.hasta; });
+}
+const coincide = (a, k) => k === 'todas' || grupoDe(estadoDe(a).clave) === k;
+
+function renderMonitoreoDatos() {
+  const foco = guardarFoco();
+  pintarMonitoreo();
+  restaurarFoco(foco);
+}
+function pintarMonitoreo() {
+  if (!monConstruido) return;
+  const m = state.mon, hoy = hoyISO();
+  const unDia = m.desde === m.hasta;
+  // Título y subtítulo
+  let sub;
+  if (unDia) sub = diaSemana(m.desde) + ' ' + fechaLarga(m.desde, true);
+  else {
+    const [y1, m1] = partes(m.desde), [y2, m2] = partes(m.hasta);
+    sub = (y1 === y2 && m1 === m2) ? 'Del ' + partes(m.desde)[2] + ' al ' + fechaLarga(m.hasta, true) : 'Del ' + fechaLarga(m.desde, y1 !== y2) + ' al ' + fechaLarga(m.hasta, true);
+  }
+  $('#mon-sub').textContent = sub;
+  const di = $('#mon-desde'), ha = $('#mon-hasta');
+  if (di.value !== m.desde) di.value = m.desde;
+  if (ha.value !== m.hasta) ha.value = m.hasta;
+  di.max = ha.max = hoy;
+
+  const enRango = enRangoMon();
+  const porRevisar = state.alertas.filter(a => esSenal(a) && estadoDe(a).clave === 'pendiente').length; // la cola no depende del rango
+  const revisadas = enRango.filter(a => estadoDe(a).clave !== 'pendiente').length;
+  $('#mon-tiles').innerHTML = `
+    <a class="tile dark" href="#detalle"><span class="t-lbl">Por revisar</span><span class="t-num">${plural(porRevisar, 'caso', 'casos')}</span><span class="t-det">Abrir la cola de revisión ${ICON.flecha}</span></a>
+    <div class="tile"><span class="t-lbl">${unDia && m.desde === hoy ? 'Revisadas hoy' : 'Revisadas en el periodo'}</span><span class="t-num">${plural(revisadas, 'caso', 'casos')}</span></div>`;
+
+  // Pestañas
+  const cuenta = k => enRango.filter(a => coincide(a, k)).length;
+  const tabs = [['pend', 'Pendientes'], ['val', 'Validadas'], ['desc', 'Descartadas'], ['todas', 'Todas']];
+  $('#mon-tabs').innerHTML = tabs.map(([k, txt]) =>
+    `<button type="button" class="tab" data-act="mon-tab" data-v="${k}" aria-pressed="${m.filtro === k}">${txt}<span class="count">${cuenta(k)}</span></button>`).join('');
+
+  // Lista paginada
+  const filas = enRango.filter(a => coincide(a, m.filtro));
+  const paginas = Math.max(1, Math.ceil(filas.length / POR_PAGINA));
+  if (m.pagina > paginas) m.pagina = paginas;
+  if (m.pagina < 1) m.pagina = 1;
+  const desdeFila = (m.pagina - 1) * POR_PAGINA;
+  const visibles = filas.slice(desdeFila, desdeFila + POR_PAGINA);
+  const pager = filas.length > POR_PAGINA ? `
+    <nav class="pager" aria-label="Páginas de casos">
+      <span class="note">Mostrando ${desdeFila + 1}–${desdeFila + visibles.length} de ${plural(filas.length, 'caso', 'casos')}</span>
+      <div class="pg-btns">
+        <button type="button" class="pg-arrow" data-act="mon-pag" data-v="-1" aria-label="Página anterior" title="Página anterior"${m.pagina <= 1 ? ' disabled' : ''}>${ICON.chevI}</button>
+        <span class="pg-num" aria-live="polite">Página ${m.pagina} de ${paginas}</span>
+        <button type="button" class="pg-arrow" data-act="mon-pag" data-v="1" aria-label="Página siguiente" title="Página siguiente"${m.pagina >= paginas ? ' disabled' : ''}>${ICON.chevD}</button>
+      </div>
+    </nav>` : '';
+  const cabecera = '<div class="row-head" aria-hidden="true"><span>Hora</span><span>Medio</span><span>Estado</span><span>Categoría</span><span></span></div>';
+  $('#mon-list').innerHTML = (visibles.length
+    ? cabecera + visibles.map(a => filaHTML(a, m.filtro === 'todas', unDia)).join('')
+    : '<p class="empty">No hay casos con este estado en el periodo elegido.</p>') + pager;
+  renderEmisoras();
+}
+
+function filaHTML(a, conEstado, unDia) {
+  const { clave, ev } = estadoDe(a);
+  const acciones = { pendiente: 'Revisar caso', confirmada: 'Ver y exportar PDF', corregida: 'Ver y exportar PDF', descartada: 'Ver y exportar PDF' };
+  let esp;
+  if (clave === 'pendiente') { const t = tiempoDesde(a.timestamp); esp = t === 'instantes' ? 'Recién detectado' : 'Espera ' + t; }
+  else esp = fmtHora(ev.fecha) + (ev.revisor ? ' · ' + ev.revisor : '');
+  const dia = diaDe(a.timestamp);
+  return `
+    <div class="row">
+      <div class="c c-id">
+        <span class="r-id">${fmtHora(a.timestamp)}</span>
+        ${unDia ? '' : '<span class="r-prog">' + esc(fechaCorta(dia)) + '</span>'}
+      </div>
+      <div class="c c-med">
+        <span class="r-med">${esc(medioDe(a))}</span>
+        <span class="r-prog">${esc(kindDe(a))}${esDemo(a) ? ' · caso de prueba' : ''}</span>
+      </div>
+      <div class="c c-est">
+        <span class="r-pill">${pillHTML(clave).replace('class="pill"', 'class="pill" style="width:100%"')}</span>
+        <span class="r-esp">${esc(esp)}</span>
+      </div>
+      <div class="c c-tipo r-tipo">${tipoHTML(tipoFinalDe(a))}${confianzaHTML(a)}</div>
+      <div class="c-act"><a class="btn" href="#detalle/${esc(a.id)}">${acciones[clave]}</a></div>
+    </div>`;
+}
+
+function renderEmisoras() {
+  const cont = $('#mon-emi'); if (!cont) return;
+  const t = state.ticker || {};
+  const ahora = Date.now();
+  const vivo = o => o && o.texto && !/^(esperando|iniciando)/i.test(o.texto) && (ahora - o.timestamp) < 90000;
+  let vivas = 0, radios = 0;
+  cont.innerHTML = FUENTES.map(f => {
+    let on, st, live = '';
+    if (f.id === 'infobae') {
+      const ult = state.alertas.find(a => medioDe(a) === f.n);
+      on = !!ult; st = ult ? 'Última ' + fmtHora(ult.timestamp) : 'Sin publicaciones';
+    } else {
+      radios++;
+      const o = t[f.id]; on = vivo(o); if (on) vivas++;
+      st = on ? 'En vivo' : 'Sin señal reciente';
+      if (on) live = '<span class="e-live">«' + esc(o.texto) + '»</span>';
     }
+    return `<div class="emi"><span class="e-dot" aria-hidden="true" style="background:${on ? '#7A1F3D' : '#FFFFFF'};border:2px solid ${on ? '#7A1F3D' : '#5F6572'}"></span><span class="e-body"><span class="e-n">${esc(f.n)}</span><span class="e-s">${esc(f.kind)}</span>${live}</span><span class="e-st">${st}</span></div>`;
+  }).join('');
+  const hora = state.ultimaCarga ? fmtHora(state.ultimaCarga.toISOString(), true) : '--:--:--';
+  $('#mon-status').innerHTML = state.online
+    ? `<span class="dot" aria-hidden="true"></span><span style="font-weight:600">${vivas} de ${radios} emisoras en vivo</span><span class="mono" style="color:var(--ink3)">actualizado ${hora}</span>`
+    : `<span class="dot off" aria-hidden="true"></span><span style="font-weight:600">Sin conexión con el servidor</span><span class="mono" style="color:var(--ink3)">últimos datos ${hora}</span>`;
+}
 
-    // Reloj header
-    setInterval(() => {
-      document.getElementById('header-time').innerText = new Date().toLocaleTimeString();
-    }, 1000);
+async function inyectarCaso() {
+  const btn = $('#btn-inyectar');
+  btn.disabled = true; const original = btn.textContent; btn.textContent = 'Analizando…';
+  try {
+    const res = await fetch('/api/analizar', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fuente: 'Inyección Demo - Caso Liceo Naval',
+        texto: 'En vivo desde los exteriores del Liceo Naval. Se ha filtrado la identidad de la escolar de 14 años de iniciales V.S. o Valeria Sánchez, quien acusa al instructor militar de agresión y tocamientos.'
+      })
+    });
+    if (!res.ok) throw new Error('el servidor respondió ' + res.status);
+    await sincronizar();
+    toast('Caso de prueba analizado. Revísalo en la cola de revisión.');
+  } catch (err) {
+    toast('No se pudo inyectar el caso: ' + err.message, true);
+  } finally {
+    btn.disabled = false; btn.textContent = original;
+  }
+}
 
-    // Inicializar polling
-    fetchAlertas();
-    fetchLiveTicker();
+/* =====================================================================
+   2 · DETALLE DE CASOS
+   ===================================================================== */
+const DEC_DE = { confirmada: 'confirmar', descartada: 'descartar', corregida: 'corregir' };
+const DEC_A = { confirmar: 'confirmada', descartar: 'descartada', corregir: 'corregida' };
+// Frases con las que el modelo suele citar cada norma en su explicación.
+const MENCIONES = { r125: /reglamento|009-2016|\b125\b/i, l46: /\b46\b|32351/i, cna: /ni[ñn]os,? y adolescentes|27337/i, pautas: /pautas/i, rm586: /\b586\b/, rvm095: /\b095\b/ };
+const mencionaNorma = (a, id) => MENCIONES[id] ? MENCIONES[id].test(String(a.justificacion_legal || '')) : false;
+const revisorActual = () => (state.user ? state.user.nombre : '');
+const casoActual = () => (state.det.id ? state.porId.get(state.det.id) : null) || null;
+const senalesDeTab = tab => state.alertas.filter(esSenal).filter(a => grupoDe(estadoDe(a).clave) === tab);
+function codigoExp(a) {
+  const d = fechaValida(a.timestamp);
+  return 'EXP-' + (d ? d.getFullYear() : new Date().getFullYear()) + '-' + String(a.id).padStart(4, '0');
+}
 
-    setInterval(fetchAlertas, 3000);
-    setInterval(fetchLiveTicker, 1500);
-  </script>
+let detConstruido = false;
+function construirDetalle() {
+  if (detConstruido) return;
+  $('#view-detalle').innerHTML = `
+    <div class="det">
+      <aside class="card rail" aria-labelledby="h-rail">
+        <div class="rail-head"><h2 id="h-rail">Cola de revisión</h2><p>Casos detectados, más recientes primero</p></div>
+        <div class="railtabs" role="group" aria-label="Filtrar casos por estado" id="det-tabs"></div>
+        <div class="ritems" id="det-items"></div>
+      </aside>
+      <div class="det-main" id="det-main"></div>
+    </div>`;
+  detConstruido = true;
+}
+
+/* ---------- Foco: no perderlo al redibujar ---------- */
+function guardarFoco() {
+  const el = document.activeElement;
+  if (!el || el === document.body) return null;
+  if (el.id) return '#' + el.id;
+  if (el.name === 'norma') return 'input[name=norma][value="' + el.value + '"]';
+  if (el.dataset && el.dataset.act) return '[data-act="' + el.dataset.act + '"]' + (el.dataset.v ? '[data-v="' + el.dataset.v + '"]' : '') + (el.dataset.id ? '[data-id="' + el.dataset.id + '"]' : '');
+  return null;
+}
+function restaurarFoco(sel) {
+  if (!sel) return;
+  const el = $(sel);
+  if (el && !el.disabled) el.focus({ preventScroll: true });
+}
+
+/* ---------- Selección ---------- */
+function sincronizarHash() {
+  if (state.vista !== 'detalle') return;
+  const h = '#detalle' + (state.det.id ? '/' + state.det.id : '');
+  if (location.hash !== h) { try { history.replaceState(null, '', h); } catch (e) { /* sin historial */ } }
+}
+// Mantiene un caso válido seleccionado; devuelve true si la selección cambió.
+function asegurarSeleccion() {
+  const d = state.det, antes = d.id;
+  const a = d.id ? state.porId.get(d.id) : null;
+  if (!a || !esSenal(a)) {
+    const lista = senalesDeTab(d.tab);
+    d.id = lista.length ? String(lista[0].id) : null;
+  }
+  if (d.id !== antes) { d.draft = null; sincronizarHash(); }
+  return d.id !== antes;
+}
+function seleccionarCaso(id, sinRender) {
+  const a = state.porId.get(String(id));
+  if (!a || !esSenal(a)) return;
+  const d = state.det;
+  d.id = String(id);
+  d.tab = grupoDe(estadoDe(a).clave);
+  d.draft = null;
+  d.idPendiente = null;
+  sincronizarHash();
+  if (!sinRender) {
+    renderRail(); renderDetalle();
+    window.scrollTo({ top: 0 });
+  }
+}
+function elegirTab(k) {
+  const d = state.det;
+  d.tab = k; d.id = null; d.draft = null; d.limite = 30;
+  asegurarSeleccion();
+  renderRail(); renderDetalle();
+}
+
+/* ---------- Borrador de la decisión ---------- */
+function nuevoDraft(a, editando) {
+  const { ev } = estadoDe(a);
+  const dr = { id: String(a.id), decision: null, tipo: '', comentario: '', normaOpen: false, normaSel: normaPropuesta(a).id, normaOtra: '', editando: !!editando, error: '' };
+  if (editando && ev) {
+    dr.decision = DEC_DE[ev.decision] || null;
+    dr.tipo = ev.decision === 'corregida' ? (ev.tipo_final || '') : '';
+    dr.comentario = ev.comentario || '';
+    if (ev.norma) { dr.normaOpen = true; dr.normaSel = ev.norma.id; dr.normaOtra = ev.norma.id === 'otra' ? ev.norma.nombre : ''; }
+  }
+  return dr;
+}
+function getDraft(a) {
+  const d = state.det;
+  if (!d.draft || d.draft.id !== String(a.id)) d.draft = nuevoDraft(a, false);
+  return d.draft;
+}
+
+/* ---------- Cola lateral ---------- */
+function itemHTML(a) {
+  const { clave, ev } = estadoDe(a);
+  const cur = String(a.id) === state.det.id;
+  const estado = clave === 'pendiente' ? 'Pendiente' : ESTADO_UI[clave].txt + ' ' + fmtHora(ev.fecha);
+  const t = tiempoDesde(a.timestamp);
+  const dia = diaDe(a.timestamp);
+  const cuando = (dia && dia !== hoyISO() ? fechaCorta(dia) + ' · ' : '') + fmtHora(a.timestamp);
+  return `
+    <button type="button" class="ritem" data-act="caso" data-id="${esc(a.id)}"${cur ? ' aria-current="true"' : ''}>
+      <span class="ri-top"><span class="id">${cuando}</span><span class="st">${esc(estado)}</span></span>
+      <span class="ri-ago"><b>${t === 'instantes' ? 'Recién detectado' : 'Hace ' + esc(t)}</b>${confianzaHTML(a)}</span>
+      <span class="ri-med">${esc(medioDe(a))}${esDemo(a) ? ' · caso de prueba' : ''}</span>
+      ${tipoHTML(tipoFinalDe(a))}
+    </button>`;
+}
+function renderRail() {
+  construirDetalle();
+  const d = state.det;
+  const cont = $('#det-items');
+  const scroll = cont.scrollTop;
+  const foco = guardarFoco();
+  $('#det-tabs').innerHTML = [['pend', 'Pendientes'], ['val', 'Validadas'], ['desc', 'Descartadas']].map(([k, l]) =>
+    `<button type="button" class="rtab" data-act="rail-tab" data-v="${k}" aria-pressed="${d.tab === k}"><span class="n">${senalesDeTab(k).length}</span><span class="l">${l}</span></button>`).join('');
+  const items = senalesDeTab(d.tab);
+  // El caso elegido siempre queda a la vista, aunque esté más abajo del límite.
+  const pos = items.findIndex(a => String(a.id) === d.id);
+  if (pos >= d.limite) d.limite = pos + 1;
+  const visibles = items.slice(0, d.limite);
+  const vacio = { pend: 'No hay casos pendientes.', val: 'Todavía no hay casos validados.', desc: 'Todavía no hay casos descartados.' }[d.tab];
+  let pie = '';
+  if (items.length > visibles.length) pie = `<div class="more"><button type="button" class="btn-link" data-act="rail-mas">Ver más casos (${items.length - visibles.length})${ICON.chevB}</button></div>`;
+  else if (state.hayMas) pie = `<div class="more"><button type="button" class="btn-link" data-act="mas-casos"${state.cargando ? ' disabled' : ''}>${state.cargando ? 'Cargando…' : 'Ver más casos' + ICON.chevB}</button></div>`;
+  cont.innerHTML = (items.length ? visibles.map(itemHTML).join('') : '<p class="empty">' + vacio + '</p>') + pie;
+  cont.scrollTop = scroll;
+  restaurarFoco(foco);
+}
+
+/* ---------- Caso: encabezado, transcripción, trazabilidad ---------- */
+function encabezadoHTML(a) {
+  const { clave } = estadoDe(a);
+  const e = ESTADO_UI[clave];
+  const tipo = tipoFinalDe(a), x = TIPOS[tipo] || TIPOS['Sin clasificar'];
+  return `
+    <section class="card casehead" aria-labelledby="h-caso">
+      <div class="ch-top">
+        <span class="id">ID interno ${esc(codigoExp(a))} · detectada ${fmtHora(a.timestamp)}</span>
+        <a class="back" href="#monitoreo">Volver al monitoreo</a>
+      </div>
+      <h1 id="h-caso" tabindex="-1">${esc(tituloCaso(a))}</h1>
+      <div class="chips">
+        <span class="chip"><span class="shape" aria-hidden="true" style="background:${x.c};clip-path:${x.clip}"></span>${esc(tipo)}</span>
+        ${a.confianza ? '<span class="chip" style="font-weight:500">Confianza del modelo: ' + esc(a.confianza) + '</span>' : ''}
+        <span class="chip" style="background:${e.bg};color:${e.fg};border:1px solid ${e.bd}">${e.largo}</span>
+      </div>
+      <dl class="dl">
+        <div><dt>Medio</dt><dd>${esc(medioDe(a))}${esDemo(a) ? ' (caso de prueba)' : ''}</dd></div>
+        <div><dt>Tipo de fuente</dt><dd>${esc(kindDe(a))}</dd></div>
+        <div><dt>Fecha y hora de detección</dt><dd>${esc(fmtFechaHora(a.timestamp))}</dd></div>
+        <div><dt>Etiqueta del modelo</dt><dd>${esc(a.tipo_violencia || '—')}</dd></div>
+      </dl>
+    </section>`;
+}
+function transcripcionHTML(a) {
+  const texto = String(a.texto_analizado || ''), cita = a.cita_exacta ? String(a.cita_exacta) : '';
+  const hallada = cita && texto.toLowerCase().indexOf(cita.toLowerCase()) >= 0;
+  const src = a.clip_url || a.audio_url || '';
+  return `
+    <section class="card pad stack g16" aria-labelledby="h-trans">
+      <div class="sec-head">
+        <h2 class="h2" id="h-trans">Transcripción</h2>
+        ${hallada ? '<span class="legend-hl"><i aria-hidden="true"></i>Fragmento señalado</span>' : ''}
+      </div>
+      ${src ? '<audio controls preload="none" src="' + esc(src) + '" style="width:100%"></audio>' : '<p class="noclip">Esta señal no tiene audio asociado: el sistema conserva la transcripción que analizó.</p>'}
+      <p class="transcript">${texto ? resaltar(texto, hallada ? cita : '') : 'Sin texto.'}</p>
+      ${cita && !hallada ? '<p class="note">El modelo citó este fragmento, pero no aparece literal en la transcripción: «' + esc(cita) + '»</p>' : ''}
+      ${!cita ? '<p class="note">El modelo no indicó un fragmento literal para esta señal.</p>' : ''}
+    </section>`;
+}
+function trazaHTML(a) {
+  const items = trazaDe(a).map(e => `
+    <li><span class="tdot" aria-hidden="true" style="background:${e.color}"></span>
+      <div class="tt"><span class="when">${esc(fmtFechaHora(e.fecha))}</span><span class="ttl">${esc(e.titulo)}</span><span class="det-t">${esc(e.detalle)}</span></div></li>`).join('');
+  return `
+    <section class="card pad" aria-labelledby="h-traza">
+      <h2 class="h2" id="h-traza">Trazabilidad</h2>
+      <p class="h2-sub" style="margin-bottom:14px">Quién validó, cuándo y con qué versión del modelo</p>
+      <ol class="traza">${items}</ol>
+    </section>`;
+}
+
+function renderDetalle() {
+  construirDetalle();
+  const main = $('#det-main');
+  const a = casoActual();
+  const foco = guardarFoco();
+  if (!a) {
+    const txt = { pend: 'No hay casos pendientes de revisión.', val: 'Todavía no hay casos validados.', desc: 'Todavía no hay casos descartados.' }[state.det.tab];
+    main.innerHTML = `
+      <section class="card pad stack g12">
+        <h1 class="h1" style="font-size:30px">Sin caso seleccionado</h1>
+        <p style="color:var(--ink2)">${txt}${state.online ? '' : ' No hay conexión con el servidor: se muestran los últimos datos recibidos.'}</p>
+        <a class="btn" style="align-self:flex-start" href="#monitoreo">Volver al monitoreo</a>
+      </section>`;
+    return;
+  }
+  main.innerHTML = encabezadoHTML(a) + `
+    <div class="two">
+      <div class="colL">${transcripcionHTML(a)}${trazaHTML(a)}</div>
+      <div class="colR" id="det-colr"></div>
+    </div>`;
+  renderColR(true);
+  restaurarFoco(foco);
+}
+
+/* ---------- Columna derecha: criterio, decisión, exportación ---------- */
+function renderColR(sinFoco) {
+  const a = casoActual(), col = $('#det-colr');
+  if (!a || !col) return;
+  const foco = sinFoco ? null : guardarFoco();
+  col.innerHTML = critHTML(a) + decisionHTML(a) + exportHTML(a);
+  restaurarFoco(foco);
+}
+
+function critHTML(a) {
+  const nv = normaVigente(a);
+  const dr = getDraft(a);
+  const { ev } = estadoDe(a);
+  const panelAbierto = dr.normaOpen && !(ev && !dr.editando) && dr.decision !== 'descartar';
+  const otras = NORMAS.filter(n => n.n !== nv.nombre);
+  return `
+    <section class="card pad stack g14" aria-labelledby="h-crit">
+      <h2 class="h2" id="h-crit">Criterio normativo</h2>
+      <div class="stack" style="gap:6px">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+          <span class="eyebrow">Criterio principal</span>
+          ${nv.corregida ? '<span class="tag tag-brand">Corregido por la persona revisora</span>' : '<span class="tag tag-line">Propuesta del sistema</span>'}
+        </div>
+        <p class="crit-name">${esc(nv.nombre)}</p>
+        <p style="color:var(--ink2)">${esc(nv.texto)}</p>
+        ${nv.corregida ? '<p style="font-size:13px;color:var(--ink3)">Propuesta del sistema: ' + esc(nv.original) + '</p>' : ''}
+      </div>
+      <div class="why">
+        <span class="eyebrow">Por qué se señala</span>
+        <p style="font-size:14px">${a.justificacion_legal ? esc(a.justificacion_legal) : 'El modelo no incluyó una explicación para esta señal.'}</p>
+        <p class="note">Explicación generada por el modelo. Es una señal preliminar, no un dictamen.</p>
+      </div>
+      ${panelAbierto ? '' : `
+      <div class="stack g8">
+        <span class="eyebrow">Otras normas de referencia</span>
+        <ul class="otras">${otras.map(n => '<li>' + esc(n.n) + (mencionaNorma(a, n.id) ? ' <span class="tag tag-line">Mencionada por el modelo</span>' : '') + '</li>').join('')}</ul>
+      </div>`}
+    </section>`;
+}
+
+function panelNormaHTML(a, dr) {
+  const prop = normaPropuesta(a);
+  const opciones = NORMAS.map(n => {
+    const on = dr.normaSel === n.id;
+    const tags = (n.id === prop.id ? '<span class="tag tag-line">Propuesta del sistema</span>' : '') + (mencionaNorma(a, n.id) ? '<span class="tag tag-brand">Mencionada por el modelo</span>' : '');
+    return `<label class="opt${on ? ' on' : ''}"><input type="radio" name="norma" value="${n.id}"${on ? ' checked' : ''}>
+      <span class="stack" style="gap:4px;min-width:0"><span class="o-t">${esc(n.n)}</span>
+      <span class="o-s"><strong style="font-weight:600;color:var(--ink)">Se aplica si:</strong> ${esc(n.si)}</span>
+      ${tags ? '<span class="opt-tags">' + tags + '</span>' : ''}</span></label>`;
+  }).join('');
+  const otraOn = dr.normaSel === 'otra';
+  const hallada = a.cita_exacta && String(a.texto_analizado || '').toLowerCase().indexOf(String(a.cita_exacta).toLowerCase()) >= 0;
+  return `
+    <fieldset class="panel" id="panel-norma">
+      <legend>Normativa correcta</legend>
+      <p style="font-size:13px;color:var(--ink2)">El sistema propone una norma según el tipo de problemática detectado. Compara y elige la que corresponde: la decisión es tuya.</p>
+      ${hallada || a.justificacion_legal ? `<div class="ctx">
+        ${hallada ? '<span><strong style="font-weight:600;color:var(--ink)">Fragmento:</strong> «<mark class="frag">' + esc(a.cita_exacta) + '</mark>»</span>' : ''}
+        ${a.justificacion_legal ? '<span><strong style="font-weight:600;color:var(--ink)">Lo que citó el modelo:</strong> ' + esc(a.justificacion_legal) + '</span>' : ''}
+      </div>` : ''}
+      ${opciones}
+      <label class="opt${otraOn ? ' on' : ''}"><input type="radio" name="norma" value="otra"${otraOn ? ' checked' : ''}>
+        <span class="stack" style="gap:2px;min-width:0"><span class="o-t">Otra norma</span><span class="o-s">Si la norma correcta no aparece en la lista.</span></span></label>
+      ${otraOn ? '<input id="d-otra" class="in" type="text" aria-label="Nombre o número de la otra norma" value="' + esc(dr.normaOtra) + '" placeholder="Nombre o número de la norma, y artículo" maxlength="200">' : ''}
+    </fieldset>`;
+}
+
+function decisionHTML(a) {
+  const { clave, ev } = estadoDe(a);
+  const dr = getDraft(a);
+  const locked = !!ev && !dr.editando;
+  const decision = locked ? DEC_DE[clave] : dr.decision;
+  const tipo = locked ? (clave === 'corregida' ? ev.tipo_final : '') : dr.tipo;
+  const comentario = locked ? (ev.comentario || '') : dr.comentario;
+  const modeloTipo = tipoModeloDe(a);
+
+  const botones = [['confirmar', ICON.check, 'Confirmar señal'], ['descartar', ICON.x, 'Descartar'], ['corregir', ICON.lapiz, 'Corregir tipo']]
+    .map(([k, ic, t]) => `<button type="button" class="dec" data-act="dec" data-v="${k}" aria-pressed="${decision === k}"${locked ? ' disabled' : ''}>${ic}<span>${t}</span></button>`).join('');
+
+  const selTipo = decision === 'corregir' ? `
+    <div class="stack" style="gap:6px">
+      <label class="flabel" for="d-tipo">Tipo de problemática correcto</label>
+      <select id="d-tipo" class="in"${locked ? ' disabled' : ''}>
+        <option value="">Selecciona un tipo</option>
+        ${TIPOS_LISTA.filter(t => t !== modeloTipo || t === tipo).map(t => '<option value="' + t + '"' + (tipo === t ? ' selected' : '') + '>' + t + '</option>').join('')}
+      </select>
+    </div>` : '';
+
+  const canNorma = !locked && decision !== 'descartar';
+  const btnNorma = canNorma ? `<button type="button" class="btn" data-act="norma-toggle" aria-expanded="${dr.normaOpen}" aria-controls="panel-norma" style="align-self:flex-start;border-color:${dr.normaOpen ? 'var(--brand)' : '#8A91A0'}">${ICON.libro}${dr.normaOpen ? 'Mantener la normativa propuesta' : 'Corregir normativa'}</button>` : '';
+  const panel = canNorma && dr.normaOpen ? panelNormaHTML(a, dr) : '';
+
+  let accion;
+  if (locked) {
+    const titulo = clave === 'confirmada' ? 'señal confirmada' : clave === 'descartada' ? 'señal descartada' : 'tipo corregido a ' + ev.tipo_final;
+    const sig = senalesDeTab('pend').some(x => String(x.id) !== String(a.id));
+    accion = `
+      <div class="saved" id="d-saved" role="status" tabindex="-1">
+        <div class="s-t">${ICON.check}<span>Decisión registrada: ${esc(titulo)}</span></div>
+        <p style="font-size:13px;color:var(--ink2)">Registrada por ${esc(ev.revisor)} el ${esc(fmtFechaHora(ev.fecha))}. Quedó anotada en la trazabilidad con la versión del modelo.${ev.norma ? ' Normativa corregida a: ' + esc(ev.norma.nombre) + '.' : ''}</p>
+        <div class="row-btns">
+          ${sig ? '<button type="button" class="btn" data-act="siguiente">Siguiente pendiente</button>' : '<span class="note">No quedan más casos pendientes.</span>'}
+          <button type="button" class="btn-quiet" data-act="cambiar">Cambiar decisión</button>
+        </div>
+      </div>`;
+  } else {
+    accion = `
+      <div class="row-btns">
+        <button type="button" class="btn btn-dark btn-lg" data-act="guardar" style="flex:1 1 200px">Guardar decisión</button>
+        ${dr.editando ? '<button type="button" class="btn-quiet" data-act="cancelar">Cancelar cambio</button>' : ''}
+      </div>`;
+  }
+
+  return `
+    <section class="card pad stack g16" aria-labelledby="h-dec">
+      <h2 class="h2" id="h-dec">Tu decisión</h2>
+      <div class="dec-grid" role="group" aria-label="Decisión">${botones}</div>
+      ${selTipo}${btnNorma}${panel}
+      <div class="stack" style="gap:6px">
+        <label class="flabel" for="d-comentario">${decision === 'descartar' ? 'Motivo del descarte' : 'Comentario'} <span style="font-weight:400;color:var(--ink3)">Obligatorio</span></label>
+        <textarea id="d-comentario" class="in" rows="3" placeholder="${decision === 'descartar' ? 'Explica por qué no es una señal. Quedará en el expediente' : 'Explica brevemente tu criterio'}"${locked ? ' disabled' : ''}>${esc(comentario)}</textarea>
+      </div>
+      ${dr.error && !locked ? '<p class="err" id="d-error" role="alert">' + esc(dr.error) + '</p>' : ''}
+      ${accion}
+      <p class="note">Tu decisión queda guardada en el servidor, firmada con tu nombre, y aparece en la trazabilidad del caso.</p>
+    </section>`;
+}
+
+function ultimaExportacion(a) {
+  const r = Store.get(a);
+  const xs = r ? r.historial.filter(e => e.tipo === 'exportacion') : [];
+  return xs.length ? xs[xs.length - 1] : null;
+}
+function exportHTML(a) {
+  const { clave, ev } = estadoDe(a);
+  const dr = getDraft(a);
+  const editando = !!ev && dr.editando;
+  const puede = !!ev && !editando;
+  const desc = clave === 'descartada';
+  let nota = '';
+  if (!ev) nota = 'Disponible cuando confirmes, corrijas o descartes el caso.';
+  else if (editando) nota = 'Guarda o cancela el cambio de decisión antes de exportar.';
+  else if (desc) nota = 'El expediente de un caso descartado incluye el motivo que escribiste.';
+  else if (clave === 'corregida' || (ev.norma && ev.norma.id)) nota = 'El expediente incluye las correcciones que hiciste y el motivo.';
+  const ult = puede ? ultimaExportacion(a) : null;
+  const etiqueta = ult ? 'Exportar de nuevo' : (desc ? 'Exportar descarte como PDF' : 'Exportar como PDF');
+  return `
+    <section class="card pad stack g14" aria-labelledby="h-exp">
+      <h2 class="h2" id="h-exp">Exportar expediente</h2>
+      <p style="font-size:14px;color:var(--ink2)">PDF con la identificación del caso, la transcripción con el fragmento señalado, el criterio normativo, el resultado de la revisión, las correcciones o el motivo del descarte, y la trazabilidad.</p>
+      <button type="button" class="btn btn-dark btn-lg" data-act="exportar"${puede ? '' : ' disabled'}>${ICON.descarga}${etiqueta}</button>
+      ${nota ? '<p class="note" style="font-size:13px">' + nota + '</p>' : ''}
+      ${ult ? '<div class="status-box" role="status"><b>' + ICON.check.replace('width="20" height="20"', 'width="18" height="18"') + 'Se descargó ' + esc(ult.archivo) + '</b><span style="font-size:13px;color:var(--ink2)">' + esc(fmtFechaHora(ult.fecha)) + ' · ' + esc(ult.revisor) + '. Quedó anotado en la trazabilidad.</span></div>' : ''}
+    </section>`;
+}
+
+/* ---------- Acciones de la decisión ---------- */
+function elegirDecision(v) {
+  const a = casoActual(); if (!a) return;
+  const dr = getDraft(a);
+  if (estadoDe(a).ev && !dr.editando) return;
+  dr.decision = v; dr.error = '';
+  if (v !== 'corregir') dr.tipo = '';
+  renderColR();
+}
+function alternarNorma() {
+  const a = casoActual(); if (!a) return;
+  const dr = getDraft(a);
+  if (dr.normaOpen) { dr.normaOpen = false; dr.normaSel = normaPropuesta(a).id; dr.normaOtra = ''; }
+  else dr.normaOpen = true;
+  dr.error = '';
+  renderColR();
+}
+function elegirNorma(valor) {
+  const a = casoActual(); if (!a) return;
+  const dr = getDraft(a);
+  dr.normaSel = valor; dr.error = '';
+  renderColR();
+  if (valor === 'otra') { const t = $('#d-otra'); if (t) t.focus(); }
+}
+function limpiarError(dr) {
+  dr.error = '';
+  const e = $('#d-error'); if (e) e.remove();
+}
+function falla(dr, msg) {
+  dr.error = msg;
+  renderColR();
+  const e = $('#d-error'); if (e) e.scrollIntoView({ block: 'nearest' });
+}
+
+let guardando = false;
+async function guardarDecision() {
+  const a = casoActual(); if (!a || guardando) return;
+  const dr = getDraft(a);
+  if (!dr.decision) return falla(dr, 'Elige una decisión: confirmar, descartar o corregir el tipo.');
+  if (dr.decision === 'corregir' && !dr.tipo) return falla(dr, 'Indica el tipo de problemática correcto.');
+  const prop = normaPropuesta(a);
+  let norma = null;
+  if (dr.normaOpen && dr.decision !== 'descartar') {
+    if (dr.normaSel === 'otra') {
+      const t = dr.normaOtra.trim();
+      if (!t) return falla(dr, 'Escribe la norma que corresponde o vuelve a la propuesta del sistema.');
+      norma = { id: 'otra', nombre: t, original: prop.n };
+    } else if (dr.normaSel !== prop.id) {
+      const x = normaPorId(dr.normaSel);
+      if (x) norma = { id: x.id, nombre: x.n, original: prop.n };
+    }
+  }
+  if (!dr.comentario.trim()) return falla(dr, dr.decision === 'descartar' ? 'Escribe el motivo del descarte.' : 'El comentario es obligatorio.');
+  const boton = $('[data-act="guardar"]');
+  guardando = true;
+  if (boton) { boton.disabled = true; boton.textContent = 'Guardando…'; }
+  try {
+    const evento = await registrarEvento({
+      alerta_id: a.id, tipo: 'validacion', decision: DEC_A[dr.decision],
+      tipo_final: dr.decision === 'corregir' ? dr.tipo : tipoModeloDe(a),
+      comentario: dr.comentario.trim(), norma, modelo: MODELO_VERSION
+    });
+    guardando = false;
+    state.det.draft = null;
+    state.det.tab = grupoDe(evento.decision);
+    refrescar(true);
+    renderDetalle();
+    const s = $('#d-saved'); if (s) s.focus({ preventScroll: true });
+    toast('Decisión guardada.');
+  } catch (err) {
+    guardando = false;
+    if (state.user) falla(dr, 'No se pudo guardar la decisión: ' + err.message + '. Vuelve a intentarlo.');
+  }
+}
+function cambiarDecision() {
+  const a = casoActual(); if (!a) return;
+  state.det.draft = nuevoDraft(a, true);
+  renderColR(true);
+  const b = $('[data-act="dec"]:not(:disabled)'); if (b) b.focus();
+}
+function cancelarCambio() {
+  state.det.draft = null;
+  renderColR(true);
+  const b = $('[data-act="cambiar"]'); if (b) b.focus();
+}
+function siguientePendiente() {
+  const a = casoActual();
+  const sig = senalesDeTab('pend').find(x => !a || String(x.id) !== String(a.id));
+  if (!sig) { toast('No quedan casos pendientes.'); return; }
+  seleccionarCaso(sig.id);
+  const h = $('#h-caso'); if (h) h.focus({ preventScroll: true });
+}
+
+/* ---------- Exportar expediente ---------- */
+function datosExpediente(a) {
+  const { clave, ev } = estadoDe(a);
+  const nv = normaVigente(a);
+  const desc = clave === 'descartada';
+  const modelo = tipoModeloDe(a), final = tipoFinalDe(a);
+  const correcciones = [];
+  if (!desc && final !== modelo) correcciones.push({ campo: 'Tipo de problemática', antes: modelo, despues: final });
+  if (!desc && nv.corregida) correcciones.push({ campo: 'Normativa', antes: nv.original, despues: nv.nombre });
+  return {
+    exp: codigoExp(a),
+    descartada: desc,
+    emitido: fechaLarga(hoyISO(), true),
+    titulo: tituloCaso(a),
+    medio: medioDe(a) + (esDemo(a) ? ' (caso de prueba)' : ''),
+    kind: kindDe(a),
+    emision: fmtFechaHora(a.timestamp),
+    tipo: final,
+    tipoModelo: modelo,
+    etiqueta: a.tipo_violencia || '—',
+    texto: a.texto_analizado || '',
+    cita: a.cita_exacta || '',
+    norma: { nombre: nv.nombre, texto: nv.texto },
+    normaCorregida: nv.corregida ? nv.original : null,
+    justificacion: a.justificacion_legal || '',
+    resultado: ESTADO_UI[clave].txt,
+    revisor: ev.revisor,
+    fechaDecision: fmtFechaHora(ev.fecha),
+    modelo: ev.modelo || MODELO_VERSION,
+    comentario: ev.comentario || '',
+    correcciones,
+    traza: trazaDe(a).map(e => ({ fecha: fmtFechaHora(e.fecha), titulo: e.titulo, detalle: e.detalle }))
+  };
+}
+function descargar(blob, nombre) {
+  const url = URL.createObjectURL(blob);
+  const enlace = document.createElement('a');
+  enlace.href = url; enlace.download = nombre;
+  document.body.appendChild(enlace); enlace.click(); enlace.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+}
+async function exportarPDF() {
+  const a = casoActual(); if (!a) return;
+  const { clave, ev } = estadoDe(a);
+  if (!ev) return;
+  let bytes;
+  try { bytes = PDF.expediente(datosExpediente(a)); }
+  catch (err) { console.error(err); toast('No se pudo generar el PDF: ' + err.message, true); return; }
+  const nombre = codigoExp(a) + (clave === 'descartada' ? '-descartado' : '') + '.pdf';
+  descargar(new Blob([bytes], { type: 'application/pdf' }), nombre);
+  try {
+    await registrarEvento({ alerta_id: a.id, tipo: 'exportacion', archivo: nombre });
+    if (state.user) { renderDetalle(); toast('Se descargó ' + nombre); }
+  } catch (err) {
+    if (state.user) toast('El PDF se descargó, pero no se pudo anotar en la trazabilidad: ' + err.message, true);
+  }
+}
+
+/* =====================================================================
+   3 · OBSERVATORIO DE CASOS VALIDADOS
+   Cuenta las decisiones guardadas en el servidor por todas las personas
+   revisoras (confirmadas o corregidas). Los casos de prueba no se cuentan.
+   ===================================================================== */
+let obsConstruido = false;
+function renderObservatorio() {
+  if (!obsConstruido) {
+    $('#view-observatorio').innerHTML = `
+      <div class="title-row">
+        <div style="max-width:660px">
+          <h1 class="h1">Observatorio de casos validados</h1>
+          <p class="sub">Qué se ha confirmado y qué se repite. Solo casos validados por una persona, con datos anonimizados. No es un ranking de infractores ni una sanción.</p>
+        </div>
+        <div class="ctrl-row">
+          <div class="fgroup"><label class="lbl" for="obs-desde">Desde</label><input id="obs-desde" class="in" type="date"></div>
+          <div class="fgroup"><label class="lbl" for="obs-hasta">Hasta</label><input id="obs-hasta" class="in" type="date"></div>
+          <div class="fgroup"><label class="lbl" for="obs-medio">Medio</label>
+            <select id="obs-medio" class="in"><option value="todos">Todos</option>${FUENTES.map(f => '<option value="' + esc(f.n) + '">' + esc(f.n) + '</option>').join('')}</select></div>
+        </div>
+      </div>
+      <div id="obs-body"></div>`;
+    obsConstruido = true;
+  }
+  renderObservatorioDatos();
+}
+
+// Reúne conteos del periodo y del medio elegidos.
+function resumenObservatorio() {
+  const o = state.obs;
+  const val = [];
+  let revisados = 0;
+  Store.todos().forEach(r => {
+    const evs = r.historial.filter(e => e.tipo === 'validacion');
+    const ev = evs[evs.length - 1];
+    if (!ev || esDemoFuente(r.fuente)) return;
+    const medio = medioDeFuente(r.fuente);
+    const dia = diaDe(ev.fecha);
+    if (!dia || dia < o.desde || dia > o.hasta) return;
+    if (o.medio !== 'todos' && medio !== o.medio) return;
+    revisados++;
+    if (ev.decision !== 'descartada') val.push({ medio, tipo: ev.tipo_final || 'Sin clasificar' });
+  });
+  const hayOtros = val.some(v => !TIPOS_LISTA.includes(v.tipo));
+  const tipos = TIPOS_LISTA.concat(hayOtros ? ['Sin clasificar'] : []);
+  const medios = FUENTES.map(f => ({ n: f.n, kind: f.kind }));
+  val.forEach(v => { if (!medios.some(m => m.n === v.medio)) medios.push({ n: v.medio, kind: 'Otra fuente' }); });
+  let filas = medios.map(m => {
+    const por = {};
+    tipos.forEach(t => { por[t] = val.filter(v => v.medio === m.n && (v.tipo === t || (t === 'Sin clasificar' && !TIPOS_LISTA.includes(v.tipo)))).length; });
+    return { n: m.n, kind: m.kind, por, total: tipos.reduce((s, t) => s + por[t], 0) };
+  });
+  if (o.medio !== 'todos') filas = filas.filter(f => f.n === o.medio);
+  filas = filas.map((f, i) => Object.assign(f, { i })).sort((a, b) => b.total - a.total || a.i - b.i);
+  // Medios (de los que están en seguimiento) con al menos un caso validado en el periodo.
+  const enSeg = FUENTES.filter(f => o.medio === 'todos' || f.n === o.medio);
+  const medConCasos = enSeg.filter(f => filas.some(x => x.n === f.n && x.total > 0)).length;
+  const pctMedios = enSeg.length ? Math.round(medConCasos / enSeg.length * 100) : 0;
+  return { total: val.length, revisados, tipos, filas, medConCasos, medTotal: enSeg.length, pctMedios };
+}
+
+function rangoObs() {
+  const o = state.obs;
+  const [y1] = partes(o.desde), [y2] = partes(o.hasta);
+  return fechaCorta(o.desde, y1 !== y2) + ' al ' + fechaCorta(o.hasta, true);
+}
+
+function renderObservatorioDatos() {
+  const foco = guardarFoco();
+  pintarObservatorio();
+  restaurarFoco(foco);
+}
+// Texto de apoyo de la tarjeta «Medios con casos validados».
+function textoMedios(r) {
+  return r.medConCasos + ' de ' + plural(r.medTotal, 'medio', 'medios') + ' con al menos un caso validado';
+}
+function pintarObservatorio() {
+  if (!obsConstruido) return;
+  const o = state.obs;
+  const hoy = hoyISO();
+  const di = $('#obs-desde'), ha = $('#obs-hasta'), me = $('#obs-medio');
+  if (di.value !== o.desde) di.value = o.desde;
+  if (ha.value !== o.hasta) ha.value = o.hasta;
+  if (me.value !== o.medio) me.value = o.medio;
+  di.max = ha.max = hoy;
+
+  const r = resumenObservatorio();
+  const rango = rangoObs();
+  const pct = r.revisados ? Math.round(r.total / r.revisados * 100) : 0;
+  const radios = FUENTES.filter(f => f.kind === 'Radio').length, prensa = FUENTES.length - radios;
+  const max = Math.max(1, ...r.filas.map(f => f.total));
+
+  const leyenda = r.tipos.map(t => { const x = TIPOS[t]; return '<li><span class="shape" aria-hidden="true" style="background:' + x.c + ';clip-path:' + x.clip + '"></span>' + esc(t) + '</li>'; }).join('');
+
+  let cuerpo;
+  if (!r.total) {
+    cuerpo = '<p class="empty" style="padding:28px 0">Aún no hay casos validados en este periodo. Cuando una persona confirme o corrija una señal, aparecerá aquí.</p>';
+  } else if (o.tabla) {
+    cuerpo = `<div style="overflow-x:auto"><table class="tb">
+      <caption class="sr-only">Casos validados por medio y tipo de problemática</caption>
+      <thead><tr><th scope="col">Medio</th><th scope="col">Tipo de fuente</th>${r.tipos.map(t => '<th scope="col">' + esc(t) + '</th>').join('')}<th scope="col">Total</th></tr></thead>
+      <tbody>${r.filas.map(f => '<tr><th scope="row" style="text-align:left;font-family:var(--sans);font-weight:600">' + esc(f.n) + '</th><td style="color:var(--ink2)">' + esc(f.kind) + '</td>' + r.tipos.map(t => '<td>' + f.por[t] + '</td>').join('') + '<td>' + f.total + '</td></tr>').join('')}</tbody>
+    </table></div>`;
+  } else {
+    cuerpo = `<div class="stack g16" style="padding-top:4px">
+      <div class="bar-head" aria-hidden="true"><span>Medio</span><span>Número de casos por tipo de problemática</span><span style="text-align:right">Total de casos</span></div>
+      ${r.filas.map(f => {
+        const segs = r.tipos.filter(t => f.por[t] > 0).map(t => '<span class="seg" title="' + esc(t) + ': ' + f.por[t] + '" style="width:' + (f.por[t] / max * 100) + '%;background:' + TIPOS[t].c + ';color:' + TIPOS[t].fg + '">' + f.por[t] + '</span>').join('');
+        const aria = f.n + ' (' + f.kind + '): ' + plural(f.total, 'caso validado', 'casos validados') + '. ' + r.tipos.map(t => t + ' ' + f.por[t]).join(', ');
+        return '<div class="bar-row"><div class="bar-name"><b>' + esc(f.n) + '</b><span>' + esc(f.kind) + '</span></div><div class="bar-track" role="img" aria-label="' + esc(aria) + '">' + segs + '</div><span class="bar-total">' + f.total + '</span></div>';
+      }).join('')}
+    </div>`;
+  }
+
+  $('#obs-body').innerHTML = `
+    <section class="kpis" aria-label="Resumen">
+      <div class="card kpi">
+        <span class="k-lbl">Casos validados · ${esc(rango)}</span>
+        <span class="k-num">${r.total}</span>
+        <span class="k-det">${r.revisados ? pct + ' % de los ' + plural(r.revisados, 'caso revisado', 'casos revisados') : 'Aún no hay casos revisados en este periodo.'}</span>
+      </div>
+      <div class="card kpi">
+        <span class="k-lbl">Medios en seguimiento</span>
+        <span class="k-num">${FUENTES.length}</span>
+        <span class="k-det">${radios} de radio y ${prensa} de prensa digital</span>
+      </div>
+      <div class="card kpi">
+        <span class="k-lbl">Medios con casos validados</span>
+        <span class="k-num">${r.pctMedios} %</span>
+        <span class="k-det">${textoMedios(r)}</span>
+      </div>
+    </section>
+    <section class="card pad stack g14" aria-labelledby="h-medios">
+      <div class="sec-head" style="align-items:flex-start">
+        <div>
+          <h2 class="h2" id="h-medios">Casos validados por medio</h2>
+          <p class="h2-sub">Cantidad de casos validados del ${esc(rango)}, por tipo de problemática</p>
+        </div>
+        <button type="button" class="btn" data-act="obs-tabla" aria-pressed="${o.tabla}">${o.tabla ? 'Ver como gráfico' : 'Ver como tabla'}</button>
+      </div>
+      <ul class="legend">${leyenda}</ul>
+      ${cuerpo}
+      <p class="note" style="padding-top:12px;border-top:1px solid var(--line2)">Conteo de casos validados, no un ranking ni una sanción. Sirve para ver recurrencias y orientar capacitaciones.</p>
+    </section>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:24px">
+      <button type="button" class="btn btn-lg" data-act="obs-pdf">${ICON.descarga}Resumen en PDF</button>
+      <button type="button" class="btn btn-lg" data-act="obs-csv">${ICON.descarga}Datos en CSV (Excel)</button>
+      <span class="note">Anonimizado: sin nombres de víctimas ni fragmentos identificables. Se cuentan las decisiones de todas las personas revisoras; los casos de prueba no se incluyen. El periodo se mide por la fecha de la decisión.</span>
+    </div>`;
+}
+
+function exportarResumenCSV() {
+  const r = resumenObservatorio(), o = state.obs;
+  const q = v => '"' + String(v).replace(/"/g, '""') + '"';
+  const lineas = [['Medio', 'Tipo de fuente'].concat(r.tipos, ['Total']).map(q).join(',')];
+  r.filas.forEach(f => lineas.push([q(f.n), q(f.kind)].concat(r.tipos.map(t => f.por[t]), [f.total]).join(',')));
+  const csv = '﻿' + lineas.join('\r\n') + '\r\n';
+  const nombre = 'qhaway-resumen-' + o.desde + '_a_' + o.hasta + '.csv';
+  descargar(new Blob([csv], { type: 'text/csv;charset=utf-8' }), nombre);
+  toast('Se descargó ' + nombre);
+}
+
+function exportarResumenPDF() {
+  const r = resumenObservatorio(), o = state.obs;
+  const tipos = r.tipos.map(t => ({ nombre: t, color: TIPOS[t].c, claroTexto: TIPOS[t].fg === '#FFFFFF' }));
+  const radios = FUENTES.filter(f => f.kind === 'Radio').length;
+  let bytes;
+  try {
+    bytes = PDF.resumen({
+      emitido: fechaLarga(hoyISO(), true), por: state.user ? state.user.nombre : '',
+      rango: rangoObs(), medio: o.medio === 'todos' ? 'Todos' : o.medio,
+      indicadores: [
+        { etiqueta: 'Casos validados', valor: r.total + (r.revisados ? ' (' + Math.round(r.total / r.revisados * 100) + ' % de los ' + plural(r.revisados, 'caso revisado', 'casos revisados') + ')' : '') },
+        { etiqueta: 'Medios en seguimiento', valor: FUENTES.length + ': ' + radios + ' de radio y ' + (FUENTES.length - radios) + ' de prensa digital' },
+        { etiqueta: 'Medios con casos validados', valor: r.pctMedios + ' % (' + textoMedios(r) + ')' }
+      ],
+      tipos, filas: r.filas.map(f => ({ n: f.n, kind: f.kind, por: f.por, total: f.total }))
+    });
+  } catch (err) { console.error(err); toast('No se pudo generar el PDF: ' + err.message, true); return; }
+  const nombre = 'qhaway-resumen-' + o.desde + '_a_' + o.hasta + '.pdf';
+  descargar(new Blob([bytes], { type: 'application/pdf' }), nombre);
+  toast('Se descargó ' + nombre);
+}
+
+/* =====================================================================
+   Eventos y arranque
+   ===================================================================== */
+function cambiarRangoMon(t) {
+  const m = state.mon, v = t.value, hoy = hoyISO();
+  if (v) {
+    if (t.id === 'mon-desde') { m.desde = v; if (m.hasta < v) m.hasta = v; }
+    else { m.hasta = v; if (m.desde > v) m.desde = v; }
+    // Fuera del día de hoy casi no hay pendientes recientes: mostrar todas las señales
+    if (m.hasta < hoy || m.desde > hoy) m.filtro = 'todas';
+    m.pagina = 1;
+  }
+  renderMonitoreoDatos();
+  if (v) cubrirAuto();
+}
+function cambiarRangoObs(t) {
+  const o = state.obs, v = t.value;
+  if (t.id === 'obs-medio') o.medio = v || 'todos';
+  else if (v) {
+    if (t.id === 'obs-desde') { o.desde = v; if (o.hasta < v) o.hasta = v; }
+    else { o.hasta = v; if (o.desde > v) o.desde = v; }
+  }
+  renderObservatorioDatos();
+}
+
+document.addEventListener('click', ev => {
+  const skip = ev.target.closest('.skip');
+  if (skip) { ev.preventDefault(); $('#main').focus(); return; }
+  const el = ev.target.closest('[data-act]');
+  if (!el || el.disabled) return;
+  switch (el.dataset.act) {
+    case 'mon-tab': state.mon.filtro = el.dataset.v; state.mon.pagina = 1; renderMonitoreoDatos(); break;
+    case 'mon-hoy': state.mon.desde = state.mon.hasta = hoyISO(); state.mon.filtro = 'pend'; state.mon.pagina = 1; renderMonitoreoDatos(); break;
+    case 'mon-pag': state.mon.pagina += Number(el.dataset.v); renderMonitoreoDatos(); { const l = $('#h-cola'); if (l) l.scrollIntoView({ block: 'start' }); } break;
+    case 'mas-casos': cargarAnteriores(); break;
+    case 'rail-mas': state.det.limite += 30; renderRail(); break;
+    case 'logout': cerrarSesion(); break;
+    case 'inyectar': inyectarCaso(); break;
+    case 'rail-tab': elegirTab(el.dataset.v); break;
+    case 'caso': seleccionarCaso(el.dataset.id); break;
+    case 'dec': elegirDecision(el.dataset.v); break;
+    case 'norma-toggle': alternarNorma(); break;
+    case 'guardar': guardarDecision(); break;
+    case 'cambiar': cambiarDecision(); break;
+    case 'cancelar': cancelarCambio(); break;
+    case 'siguiente': siguientePendiente(); break;
+    case 'exportar': exportarPDF(); break;
+    case 'obs-tabla': state.obs.tabla = !state.obs.tabla; renderObservatorioDatos(); break;
+    case 'obs-csv': exportarResumenCSV(); break;
+    case 'obs-pdf': exportarResumenPDF(); break;
+  }
+});
+document.addEventListener('input', ev => {
+  const t = ev.target;
+  if (t.id !== 'd-comentario' && t.id !== 'd-otra') return;
+  const a = casoActual(); if (!a) return;
+  const dr = getDraft(a);
+  if (t.id === 'd-comentario') dr.comentario = t.value; else dr.normaOtra = t.value;
+  if (dr.error) limpiarError(dr);
+});
+document.addEventListener('change', ev => {
+  const t = ev.target;
+  if (t.id === 'd-tipo') { const a = casoActual(); if (a) { const dr = getDraft(a); dr.tipo = t.value; limpiarError(dr); } }
+  else if (t.name === 'norma') elegirNorma(t.value);
+  else if (t.id === 'mon-desde' || t.id === 'mon-hasta') cambiarRangoMon(t);
+  else if (/^obs-(desde|hasta|medio)$/.test(t.id)) cambiarRangoObs(t);
+});
+window.addEventListener('hashchange', mostrarVista);
+$('#login-form').addEventListener('submit', iniciarSesion);
+
+/* ---------- Arranque ---------- */
+const reloj = () => { $('#clock').textContent = fmtHora(new Date().toISOString(), true); };
+reloj(); setInterval(reloj, 1000);
+setInterval(sincronizar, 3000);
+setInterval(fetchTicker, 1500);
+(async function arrancar() {
+  try {
+    const res = await fetch('/api/sesion', { credentials: 'same-origin' });
+    const j = await res.json();
+    state.hayUsuarios = j.hay_usuarios !== false;
+    if (j.usuario) { entrar(j.usuario); fetchTicker(); }
+    else mostrarLogin();
+  } catch (err) {
+    mostrarLogin('No se pudo conectar con el servidor. Comprueba que el backend esté encendido.');
+  }
+})();
+</script>
 </body>
 </html>
