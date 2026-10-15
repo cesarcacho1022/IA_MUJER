@@ -60,11 +60,11 @@ async function main() {
   nombre = String(nombre || '').trim();
   if (!nombre) throw new Error('El nombre es obligatorio.');
   if (!clave) {
-    clave = await preguntar('Contraseña (mínimo 8 caracteres): ', true);
+    clave = await preguntar('Contraseña (mínimo 4 caracteres): ', true);
     const repetida = await preguntar('Repite la contraseña: ', true);
     if (clave !== repetida) throw new Error('Las contraseñas no coinciden.');
   }
-  if (String(clave).length < 8) throw new Error('La contraseña debe tener al menos 8 caracteres.');
+  if (String(clave).length < 4) throw new Error('La contraseña debe tener al menos 4 caracteres.');
 
   const hash = await hashClave(clave);
   const r = await pool.query(
